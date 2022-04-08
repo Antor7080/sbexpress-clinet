@@ -26,7 +26,7 @@ const EditRechargeModal = ({ data, call, setCall }) => {
             object[key] = value;
         });
 
-        axios.put(`https://sbexpressbd.com/Server/recharge/update/${data._id}`, object)
+        axios.put(`http://localhost:5000/recharge/update/${data._id}`, object)
 
             .then(function (response) {
                 console.log(response);

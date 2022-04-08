@@ -39,6 +39,7 @@ import Login from './components/Admin/Login/Login'
 import AuthProvider from './Context/AuthProvider/AuthProvider';
 import axios from 'axios';
 import AdminPrivateRoute from './AdminPrivateRoute';
+import Register from './components/Admin/Login/Register';
 
 function App() {
   axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -59,7 +60,16 @@ function App() {
             <Route exact path="/">
               {localStorage.getItem("token") ? <Redirect to={userData.role === 1 ? "/admin/dashboard" : "/merchant/dashboard"} /> : <Login />}
             </Route>
+            <Route exact path="/register">
+              {localStorage.getItem("token") ? <Redirect to={userData.role === 1 ? "/admin/dashboard" : "/merchant/dashboard"} /> : <Register />}
+            </Route>
 
+
+            {/*      {
+              !localStorage.getItem("token") ? <Route exact path="/register">
+                <Register></Register>
+              </Route> : <Redirect to={userData.role === 1 ? "/admin/dashboard" : "/merchant/dashboard"} />
+            } */}
             <Route exact path="/login">
               {localStorage.getItem("token") ? <Redirect to={userData.role === 1 ? "/admin/dashboard" : "/merchant/dashboard"} /> : <Login />}
             </Route>

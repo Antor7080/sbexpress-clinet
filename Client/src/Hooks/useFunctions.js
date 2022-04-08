@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import Swal from 'sweetalert2';
 
 const useFunctions = () => {
+    const [call1, setCall1] = useState(true);
+    const [loadig, setLoading] = useState(false);
     const [errors, serErrors] = useState("");
     const [user, setUser] = useState(null)
-    const [user1, setUser1] = useState({})
 
     const [token, setToken] = useState('')
-
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -23,22 +23,17 @@ const useFunctions = () => {
     })
     const loginUser = (items) => {
         axios
-            .post("https://sbexpressbd.com/Server/user/login", items)
+            .post("http://localhost:5000/user/login", items)
             .then((response) => {
-
                 if (response.status === 200) {
-
                     Toast.fire({
                         icon: "success",
                         title: response.data.msg,
                     });
                     setToken(response.data.accesstoken)
-                    setUser(response.data.userData)
                     localStorage.setItem("user", JSON.stringify(response.data.userData))
-
                     localStorage.setItem("token", response.data.accesstoken);
                     setToken(response.data.accesstoken)
-                    setUser1(response.data.userData);
                     if (response.data.userData.role === 1) {
                         items.history.push("admin/dashboard");
                     }
@@ -71,7 +66,7 @@ const useFunctions = () => {
             });
 
 
-        axios.get("https://sbexpressbd.com/Server/user/infor", {
+        axios.get("http://localhost:5000/user/infor", {
             headers: {
                 'Authorization': token
             }
@@ -81,7 +76,7 @@ const useFunctions = () => {
     }
 
     const logout = (history) => {
-        axios.get("https://sbexpressbd.com/Server/user/logout")
+        axios.get("http://localhost:5000/user/logout")
             .then((res) => {
                 if (res.status === 200) {
 
@@ -92,19 +87,34 @@ const useFunctions = () => {
                     history.push("/login");
                     localStorage.removeItem("token");
                     localStorage.removeItem("user")
-
                     window.location.reload();
                 }
             })
 
     }
+    const userInfo = localStorage.getItem('user')
+    const userData = (JSON.parse(userInfo));
+    const token1 = localStorage.getItem('token')
+    useEffect(() => {
+        axios.get(`http://localhost:5000/user/information/${userData?._id}`, {
+            headers: {
+                'Authorization': token1,
 
+            }
+        })
+            .then(data => setUser(data.data))
+    }, [userData?._id, token1]);
+
+    console.log(user);
     return {
+        setLoading,
+        loadig,
         user,
         loginUser,
         errors,
-        user1,
-        logout
+        logout,
+        call1,
+        setCall1
     }
 }
 export default useFunctions;

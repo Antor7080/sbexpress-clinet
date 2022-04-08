@@ -1,9 +1,10 @@
 import axios from 'axios';
 import React, { useRef } from 'react';
 import Swal from "sweetalert2";
+import useAuth from '../../../Hooks/useAuth';
 
 const EditRechargeModal = ({ data, call, setCall }) => {
-
+    const { setCall1, call1 } = useAuth()
 
     const Toast = Swal.mixin({
         toast: true,
@@ -26,12 +27,13 @@ const EditRechargeModal = ({ data, call, setCall }) => {
             object[key] = value;
         });
 
-        axios.put(`https://sbexpressbd.com/Server/recharge/update/${data._id}`, object)
+        axios.put(`http://localhost:5000/recharge/update/${data._id}`, object)
 
             .then(function (response) {
                 console.log(response);
                 if (response.status === 200) {
                     setCall(!call)
+                    setCall1(!call1)
                     Toast.fire({
                         icon: "success",
                         title: response.data.msg,

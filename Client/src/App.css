@@ -111,8 +111,8 @@ thead[data-test="table-foot"] {
   margin-top: 20px;
   margin-bottom: 10px;
 }
-.add-merchant input {
-  margin-bottom: 15px;
+.row div {
+  margin-top: 15px;
 }
 
 .view-top {
@@ -163,6 +163,10 @@ label {
   .inner-ai h4 {
     font-size: 1.1rem;
   }
+}
+.error {
+  border: 1px solid red;
+ 
 }
 @media (min-width: 992px) and (max-width: 1200px) {
   .inner-a h4 {

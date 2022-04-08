@@ -26,7 +26,7 @@ const EditBalanceModal = ({ data, call, setCall }) => {
       object[key] = value;
     });
 
-    axios.put(`https://sbexpressbd.com/Server/balance/update/${data._id}`, object)
+    axios.put(`http://localhost:5000/balance/update/${data._id}`, object)
 
       .then(function (response) {
         console.log(response);
@@ -95,7 +95,7 @@ const EditBalanceModal = ({ data, call, setCall }) => {
                 <label htmlFor="amount">Amount</label>
                 <input className="form-control" type="number" name="amount" id="amount" defaultValue={data?.amount} />
                 <label htmlFor="contact">Contact Number</label>
-                <input className="form-control" type="number" name="" id="contact" value={data?.user?.number} disabled />
+                <input className="form-control" type="text" name="" id="contact" value={data?.user?.number} disabled />
                 <label htmlFor="status">Status</label>
                 <select
 

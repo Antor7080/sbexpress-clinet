@@ -1,57 +1,53 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 
 const Navigation = () => {
   const history = useHistory()
   const { logout } = useAuth();
+  const { call1 } = useAuth()
+  const [user, setUserData] = useState({})
+  const token = localStorage.getItem('token')
+  const userInfo = localStorage.getItem('user')
+  const userData = (JSON.parse(userInfo))
+
+  useEffect(() => {
+    axios.get(`http://localhost:5000/user/information/${userData._id}`, {
+      headers: {
+        'Authorization': token,
+      }
+    })
+
+      .then(data => setUserData(data.data))
+  }, [userData._id, token, call1]);
   return (
     <div>
       <div>
         <nav className="main-header navbar navbar-expand navbar-white fixed-top navbar-light mb-5">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <a className="nav-link" data-widget="pushmenu" href="/">
+              <Link className="nav-link" data-widget="pushmenu" to="/">
                 <i className="fas fa-bars" />
-              </a>
+              </Link>
             </li>
             <li className="nav-item d-none d-sm-inline-block">
-              <a href="index3.html" className="nav-link">
+              <Link to="/" className="nav-link">
                 Home
-              </a>
+              </Link>
             </li>
-            <li className="nav-item d-none d-sm-inline-block">
-              <a href="/" className="nav-link">
-                Contact
-              </a>
-            </li>
+
           </ul>
-          <form className="form-inline ml-3">
-            <div className="input-group input-group-sm">
-              <input
-                className="form-control form-control-navbar"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <div className="input-group-append">
-                <button className="btn btn-navbar" type="submit">
-                  <i className="fas fa-search" />
-                </button>
-              </div>
-            </div>
-          </form>
+
           <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <input className="form-control" type="date" name="" id="" />
-            </li>
+
             <li className="nav-item dropdown">
-              <a className="nav-link" data-toggle="dropdown" href="/">
+              <Link className="nav-link" data-toggle="dropdown" href="/">
                 <i className="far fa-comments" />
                 <span className="badge badge-danger navbar-badge">3</span>
-              </a>
+              </Link>
               <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <a href="/" className="dropdown-item">
+                <Link href="/" className="dropdown-item">
                   <div className="media">
                     <img
                       src="dist/img/user1-128x128.jpg"
@@ -71,9 +67,9 @@ const Navigation = () => {
                       </p>
                     </div>
                   </div>
-                </a>
+                </Link>
                 <div className="dropdown-divider" />
-                <a href="/" className="dropdown-item">
+                <Link href="/" className="dropdown-item">
                   <div className="media">
                     <img
                       src="dist/img/user8-128x128.jpg"
@@ -93,9 +89,9 @@ const Navigation = () => {
                       </p>
                     </div>
                   </div>
-                </a>
+                </Link>
                 <div className="dropdown-divider" />
-                <a href="/" className="dropdown-item">
+                <Link href="/" className="dropdown-item">
                   <div className="media">
                     <img
                       src="dist/img/user3-128x128.jpg"
@@ -115,56 +111,67 @@ const Navigation = () => {
                       </p>
                     </div>
                   </div>
-                </a>
+                </Link>
                 <div className="dropdown-divider" />
-                <a href="/" className="dropdown-item dropdown-footer">
+                <Link href="/" className="dropdown-item dropdown-footer">
                   See All Messages
-                </a>
+                </Link>
               </div>
             </li>
             <li className="nav-item dropdown">
-              <a className="nav-link" data-toggle="dropdown" href="/">
+              <Link className="nav-link" data-toggle="dropdown" href="/">
                 <i className="far fa-bell" />
                 <span className="badge badge-warning navbar-badge">15</span>
-              </a>
+              </Link>
               <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <span className="dropdown-item dropdown-header">
                   15 Notifications
                 </span>
                 <div className="dropdown-divider" />
-                <a href="/" className="dropdown-item">
+                <Link href="/" className="dropdown-item">
                   <i className="fas fa-envelope mr-2" /> 4 new messages
                   <span className="float-right text-muted text-sm">3 mins</span>
-                </a>
+                </Link>
                 <div className="dropdown-divider" />
-                <a href="/" className="dropdown-item">
+                <Link href="/" className="dropdown-item">
                   <i className="fas fa-users mr-2" /> 8 friend requests
                   <span className="float-right text-muted text-sm">
                     12 hours
                   </span>
-                </a>
+                </Link>
                 <div className="dropdown-divider" />
-                <a href="/" className="dropdown-item">
+                <Link href="/" className="dropdown-item">
                   <i className="fas fa-file mr-2" /> 3 new reports
                   <span className="float-right text-muted text-sm">2 days</span>
-                </a>
+                </Link>
                 <div className="dropdown-divider" />
-                <a href="/" className="dropdown-item dropdown-footer">
+                <Link href="/" className="dropdown-item dropdown-footer">
                   See All Notifications
-                </a>
+                </Link>
               </div>
             </li>
             <li className="nav-item">
-              <a
+              <Link
                 className="nav-link"
                 data-widget="control-sidebar"
                 data-slide="true"
                 href="/"
               >
 
-              </a>
+              </Link>
 
             </li>
+            {user.role === 0 ? <li>
+              <Link to={"/merchant/all-balance"}>  <button type="button" class="btn btn-success mx-2">
+                Balance <span class="badge badge-light">৳ {user.amount}</span>
+              </button></Link>
+            </li> :
+              <li>
+                <Link to={"/admin/balance-request"}>  <button type="button" class="btn btn-success mx-2">
+                  Balance Request <span class="badge badge-light">৳ {user.amount}</span>
+                </button></Link>
+              </li>}
+
             <li>
               <button onClick={() => { logout(history) }} className="btn btn-danger m-0">LogOut</button>
             </li>

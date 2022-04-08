@@ -4,6 +4,7 @@ import Header from '../../../pages/Header';
 
 
 const AllRecharge = () => {
+  const [loading, setLoading] = useState(false);
   const [rechargeData, setRechargeData] = useState([]);
   const [displayrechargeData, setDisplayRechargeData] = useState([]);
   const [page, setPage] = useState(1);
@@ -17,7 +18,8 @@ const AllRecharge = () => {
     }
   };
   useEffect(() => {
-    fetch(`https://sbexpressbd.com/Server/recharge/recharges?status=Approved&page=${page}`, config)
+    setLoading(true);
+    fetch(`http://localhost:5000/recharge/recharges?status=Approved&page=${page}`, config)
       .then(res => res.json())
       .then(data => {
         setRechargeData(data.data);
@@ -25,7 +27,7 @@ const AllRecharge = () => {
         const count = data.total;
         const pageNumber = Math.ceil(count / 10);
         setPageCount(pageNumber);
-
+        setLoading(false)
       })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, call])
@@ -57,36 +59,41 @@ const AllRecharge = () => {
               onChange={handleSearch}
               placeholder="Search"
             />
-            <div class="card">
-              <table className="table table-bordered text-center">
-                <thead style={{ backgroundColor: "#ededed" }}>
-                  <tr>
-                    <th scope="col">Invoice</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Shop Name</th>
-                    <th scope="col">Operator</th>
-                    <th scope="col">Contact Number</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Updated Date</th>
+            {
+              loading ? <div className="text-center">
+                <div class="spinner-border text-center text-danger" style={{ width: "13rem", height: '13rem' }} role="status">
+                  <span class="sr-only text-danger">Loading...</span>
+                </div>
+              </div> : <div class="card">
+                <table className="table table-bordered text-center">
+                  <thead style={{ backgroundColor: "#ededed" }}>
+                    <tr>
+                      <th scope="col">Invoice</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Amount</th>
+                      <th scope="col">Shop Name</th>
+                      <th scope="col">Operator</th>
+                      <th scope="col">Contact Number</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Updated Date</th>
 
-                  </tr>
-                </thead>
-                <tbody>
-                  {displayrechargeData.length === 0 && (
-                    <p className="text-danger text-center">No data found!</p>
-                  )}
-                  {displayrechargeData && displayrechargeData.map((data) => (
-                    <tr key={data.invoice}>
-                      <td>{data.invoice}</td>
-                      <td>{data.user.name}</td>
-                      <td>{data.amount}</td>
-                      <td>{data.user.shope_name}</td>
-                      <td>{data.simOperator}</td>
-                      <td>{data.user.number}</td>
-                      <td>{data.status}</td>
-                      <td>{new Date(displayrechargeData[0].updatedAt).toLocaleDateString()} </td>
-                      {/*  <td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {displayrechargeData.length === 0 && (
+                      <p className="text-danger text-center">No data found!</p>
+                    )}
+                    {displayrechargeData && displayrechargeData.map((data) => (
+                      <tr key={data.invoice}>
+                        <td>{data.invoice}</td>
+                        <td>{data.user.name}</td>
+                        <td>{data.amount}</td>
+                        <td>{data.user.shope_name}</td>
+                        <td>{data.simOperator}</td>
+                        <td>{data.user.number}</td>
+                        <td>{data.status}</td>
+                        <td>{new Date(displayrechargeData[0].updatedAt).toLocaleDateString()} </td>
+                        {/*  <td>
                             <div className="d-flex align-items-center pending-button">
                               <button
                                 type="button"
@@ -152,56 +159,57 @@ const AllRecharge = () => {
                               </div>
                             </div>
                             </td> */}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <nav aria-label="Page navigation example">
-                <ul className="pagination">
-                  <li className="page-item">
-                    <a
-                      type="button"
-                      onClick={() => setPage(page - 1)}
-                      className={
-                        page === 1 ? "page-link btn disabled" : "page-link btn"
-                      }
-                      href
-                    >
-                      Previous
-                    </a>
-                  </li>
-
-                  {[...Array(pageCount).keys()].map((number) => (
-                    <li className="page-item" key={number}>
-                      <button
-                        onClick={() => setPage(number + 1)}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <nav aria-label="Page navigation example">
+                  <ul className="pagination">
+                    <li className="page-item">
+                      <a
+                        type="button"
+                        onClick={() => setPage(page - 1)}
                         className={
-                          page === number + 1
-                            ? " btn pagination-btn btn-success"
-                            : "page-link btn pagination-btn"
+                          page === 1 ? "page-link btn disabled" : "page-link btn"
                         }
+                        href
                       >
-                        {number + 1}
-                      </button>
+                        Previous
+                      </a>
                     </li>
-                  ))}
 
-                  <li className="page-item">
-                    <a
-                      onClick={() => setPage(page + 1)}
-                      className={
-                        page === pageCount
-                          ? "page-link btn disabled"
-                          : "page-link btn"
-                      }
-                      href
-                    >
-                      Next
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
+                    {[...Array(pageCount).keys()].map((number) => (
+                      <li className="page-item" key={number}>
+                        <button
+                          onClick={() => setPage(number + 1)}
+                          className={
+                            page === number + 1
+                              ? " btn pagination-btn btn-success"
+                              : "page-link btn pagination-btn"
+                          }
+                        >
+                          {number + 1}
+                        </button>
+                      </li>
+                    ))}
+
+                    <li className="page-item">
+                      <a
+                        onClick={() => setPage(page + 1)}
+                        className={
+                          page === pageCount
+                            ? "page-link btn disabled"
+                            : "page-link btn"
+                        }
+                        href
+                      >
+                        Next
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            }
           </div>
         </section>
       </div>

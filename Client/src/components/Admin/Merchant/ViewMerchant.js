@@ -25,7 +25,7 @@ const ViewMerchant = () => {
   const { id } = useParams()
   const [merchantData, setMerchantData] = useState([]);
   useEffect(() => {
-    fetch(`https://sbexpressbd.com/Server/user/information/${id}`)
+    fetch(`http://localhost:5000/user/information/${id}`)
       .then(res => res.json())
       .then(data => setMerchantData(data))
   }, [id]);

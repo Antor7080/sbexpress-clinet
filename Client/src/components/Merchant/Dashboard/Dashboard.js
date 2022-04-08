@@ -18,10 +18,6 @@ const Dashboard = () => {
             </div> */}
             <div className="d-flex justify-content-between">
               <h3 className="m-0 text-dark">Quick Access</h3>
-              <Link to="/balance-request">  <button type="button" class="btn btn-danger">
-                Balance Request <span class="badge badge-light">৳ 02,57,368.00</span>
-              </button></Link>
-
             </div>
             <hr className="quick-hr" />
           </div>
@@ -33,7 +29,7 @@ const Dashboard = () => {
           <div className="container-fluid">
             <div className="row g-1">
               <div className="col-lg-3 col-md-6 col-6">
-                <Link to="/add-recharge">
+                <Link to="/merchant/add-recharge">
                   <div className="small-box bg-light shadow inner-a">
                     <div className="inner text-center">
                       <h4>
@@ -47,7 +43,7 @@ const Dashboard = () => {
                 </Link>
               </div>
               <div className="col-lg-3 col-md-6 col-6">
-                <Link to="/add-mobile-banking">
+                <Link to="/merchant/add-mobile-banking">
                   <div className="small-box bg-light shadow inner-a">
                     <div className="inner text-center">
                       <h4>
@@ -61,7 +57,7 @@ const Dashboard = () => {
                 </Link>
               </div>
               <div className="col-lg-3 col-md-6 col-6">
-                <Link to="/add-new-sim">
+                <Link to="/merchant/add-new-sim">
                   <div className="small-box bg-light shadow inner-a">
                     <div className="inner text-center">
                       <h4>
@@ -75,7 +71,7 @@ const Dashboard = () => {
                 </Link>
               </div>
               <div className="col-lg-3 col-md-6 col-6">
-                <Link to="/add-direct-bank">
+                <Link to="/merchant/add-direct-bank">
                   <div className="small-box bg-light shadow inner-a">
                     <div className="inner text-center">
                       <h4>

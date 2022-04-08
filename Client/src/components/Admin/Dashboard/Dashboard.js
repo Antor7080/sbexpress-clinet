@@ -10,17 +10,10 @@ const Dashboard = () => {
       <div className="content-wrapper">
         <div className="content-header">
           <div className="container-fluid">
-            {/* <div className="row mb-2">
-              <div className="col-sm-6">
-                <h3 className="m-0 text-dark">Quick Access</h3>
-                <hr />
-              </div>
-            </div> */}
+         
             <div className="d-flex justify-content-between">
               <h3 className="m-0 text-dark">Quick Access</h3>
-              <Link to="/balance-request">  <button type="button" class="btn btn-danger">
-                Balance Request <span class="badge badge-light">৳ 02,57,368.00</span>
-              </button></Link>
+         
 
             </div>
             <hr className="quick-hr" />
@@ -29,119 +22,7 @@ const Dashboard = () => {
 
         {/* Add all  */}
 
-        <section className="content">
-          <div className="container-fluid">
-            <div className="row g-1">
-              <div className="col-lg-3 col-md-6 col-6">
-                <Link to="/add-recharge">
-                  <div className="small-box bg-light shadow inner-a">
-                    <div className="inner text-center">
-                      <h4>
-                        Add <br /> Recharge
-                      </h4>
-                    </div>
-                    <div className="icon text-info">
-                      <i class="fas fa-dollar-sign"></i>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="col-lg-3 col-md-6 col-6">
-                <Link to="/add-mobile-banking">
-                  <div className="small-box bg-light shadow inner-a">
-                    <div className="inner text-center">
-                      <h4>
-                        Add <br /> Mobile Banking
-                      </h4>
-                    </div>
-                    <div className="icon text-success">
-                      <i class="fas fa-mobile-alt"></i>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="col-lg-3 col-md-6 col-6">
-                <Link to="/add-new-sim">
-                  <div className="small-box bg-light shadow inner-a">
-                    <div className="inner text-center">
-                      <h4>
-                        Add <br /> Sim Purchase
-                      </h4>
-                    </div>
-                    <div className="icon text-warning">
-                      <i class="fas fa-sim-card"></i>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="col-lg-3 col-md-6 col-6">
-                <Link to="/add-direct-bank">
-                  <div className="small-box bg-light shadow inner-a">
-                    <div className="inner text-center">
-                      <h4>
-                        Add <br /> Direct Bank
-                      </h4>
-                    </div>
-                    <div className="icon text-danger">
-                      <i class="fas fa-university"></i>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-
-              {/* pending  */}
-
-              <div className="col-lg-3 col-md-6 col-6">
-                <div className="small-box inner-p bg-light shadow">
-                  <div className="inner">
-                    <h4>Pending Recharge</h4>
-                    <h3>150</h3>
-                    <p>Total Amount: 1000৳</p>
-                  </div>
-                  <div className="icon text-info">
-                    <i class="fas fa-dollar-sign"></i>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-3 col-md-6 col-6">
-                <div className="small-box inner-p bg-light shadow">
-                  <div className="inner">
-                    <h4>Pending Mobile Banking</h4>
-                    <h3>150</h3>
-                    <p>Total Amount: 1000৳</p>
-                  </div>
-                  <div className="icon text-success">
-                    <i class="fas fa-mobile-alt"></i>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-3 col-md-6 col-6">
-                <div className="small-box inner-p bg-light shadow">
-                  <div className="inner">
-                    <h4>Pending Sim Purchase</h4>
-                    <h3>150</h3>
-                    <p>Total Amount: 1000৳</p>
-                  </div>
-                  <div className="icon text-warning">
-                    <i class="fas fa-sim-card"></i>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-3 col-md-6 col-6">
-                <div className="small-box inner-p bg-light shadow">
-                  <div className="inner">
-                    <h4>Pending Direct Bank</h4>
-                    <h3>150</h3>
-                    <p>Total Amount: 1000৳</p>
-                  </div>
-                  <div className="icon text-danger">
-                    <i class="fas fa-university"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+       
 
         {/* recharge point info */}
 

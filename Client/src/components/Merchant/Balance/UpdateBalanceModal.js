@@ -24,7 +24,7 @@ const UpdateBalanceModal = ({ data, call, setCall }) => {
             object[key] = value;
         });
 
-        axios.put(`https://sbexpressbd.com/Server/balance/update/${data._id}`, object)
+        axios.put(`http://localhost:5000/balance/update/${data._id}`, object)
 
             .then(function (response) {
 
@@ -58,7 +58,7 @@ const UpdateBalanceModal = ({ data, call, setCall }) => {
     const handleDelete = (e) => {
         const status = { status: 'Rejected' }
         e.preventDefault();
-        axios.put(`https://sbexpressbd.com/Server/balance/update/${data._id}`, status)
+        axios.put(`http://localhost:5000/balance/update/${data._id}`, status)
 
             .then(function (response) {
                 console.log(response);

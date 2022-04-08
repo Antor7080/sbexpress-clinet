@@ -1,29 +1,18 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
 import logo from "../../img/logo.png";
 
 
 const Menu = () => {
-  const [user, setUserData] = useState({})
-  const token = localStorage.getItem('token')
+  const { user } = useAuth()
   const userInfo = localStorage.getItem('user')
   const userData = (JSON.parse(userInfo))
-  useEffect(() => {
-    axios.get(`https://sbexpressbd.com/Server/user/information/${userData._id}`, {
-      headers: {
-        'Authorization': token,
-        
-      }
-    })
-
-
-      .then(data => setUserData(data.data))
-  }, [userData._id, token]);
   return (
     <div>
       {
-        userData.role === 1 && <aside className="main-sidebar sidebar-light-primary">
+        userData?.role === 1 && <aside className="main-sidebar sidebar-light-primary">
           <div className="text-center my-logo">
             <Link to="/admin/dashboard">
               <img src={logo} width="220" alt="" className="brand-image" />
@@ -33,11 +22,11 @@ const Menu = () => {
           <div className="sidebar">
             <div className="user-panel  d-flex">
               <div className="image">
-                <img src={`https://sbexpressbd.com/Server/uploads/${user.avatar}`} className="img-circle elevation-2" alt="User " />
+                <img src={`http://localhost:5000/uploads/${user?.avatar}`} className="img-circle elevation-2" alt="User " />
               </div>
               <div className="info">
                 <Link to="#" className="d-block">
-                  {user.name}
+                  {user?.name}
                 </Link>
               </div>
             </div>
@@ -319,7 +308,7 @@ const Menu = () => {
         </aside>
       }
 
-      {userData.role === 0 && <aside className="main-sidebar sidebar-light-primary">
+      {userData?.role === 0 && <aside className="main-sidebar sidebar-light-primary">
         <div className="text-center my-logo">
           <Link to="/merchant/dashboard">
             <img src={logo} width="220" alt="" className="brand-image" />
@@ -329,11 +318,11 @@ const Menu = () => {
         <div className="sidebar">
           <div className="user-panel  d-flex">
             <div className="image">
-              <img src={`https://sbexpressbd.com/Server/uploads/${user.avatar}`} className="img-circle elevation-2" alt="User " />
+              <img src={`http://localhost:5000/uploads/${user?.avatar}`} className="img-circle elevation-2" alt="User " />
             </div>
             <div className="info">
               <Link to="#" className="d-block">
-                {user.name}
+                {user?.name}
               </Link>
             </div>
           </div>

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import useAuth from '../../../Hooks/useAuth';
-
+import logo from "../../../img/logo.png";
 
 
 export default function Login() {
@@ -27,9 +27,9 @@ export default function Login() {
 					from-parent  m-5 pt-5 "
                         >
                             <form className="border p-3 w-100 bg-white rounded-2 py-5">
-                                <h1 className="mb-4 text-center" style={{ color: "#f46f22" }}>
-                                    <span className="text-danger font-weight-bold">SB EXPRESS</span>{" "}
-                                    <br /> Admin Login
+                                <img className='img-fluid' src={logo} alt="" />
+                                <h1 className="my-2 text-center" style={{ color: "#f46f22" }}>
+                                    Login
                                 </h1>
                                 <div className="form-group">
                                     <div className="my-3 w-100">
@@ -67,6 +67,9 @@ export default function Login() {
                                     >
                                         LOGIN
                                     </button>
+                                    <h6> Don`t Have Account?<Link
+                                        to="/register"> Register</Link>
+                                    </h6>
                                 </div>
                             </form>
                         </div>

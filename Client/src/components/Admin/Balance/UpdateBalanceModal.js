@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Swal from "sweetalert2";
 import axios from "axios";
+import useAuth from '../../../Hooks/useAuth';
 const UpdateBalanceModal = ({ data, call, setCall }) => {
-
+    const { call1, setCall1 } = useAuth()
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -23,47 +24,59 @@ const UpdateBalanceModal = ({ data, call, setCall }) => {
         formdata.forEach(function (value, key) {
             object[key] = value;
         });
+        console.log(typeof (object.invoice))
+        console.log(typeof (data.invoice))
+        if (parseInt(object.invoice) === data.invoice) {
+            axios.put(`http://localhost:5000/balance/update/${data._id}`, object)
 
-        axios.put(`https://sbexpressbd.com/Server/balance/update/${data._id}`, object)
-
-            .then(function (response) {
-
-
-                if (response.status === 200) {
-                    setCall(!call);
-                    Toast.fire({
-                        icon: "success",
-                        title: response.data.msg,
-                    });
-                }
-                else if (response.status === 400) {
+                .then(function (response) {
+                    if (response.status === 200) {
+                        setCall(!call);
+                        setCall1(!call1)
+                        Toast.fire({
+                            icon: "success",
+                            title: response.data.msg,
+                        });
+                    }
+                    else if (response.status === 400) {
+                        Toast.fire({
+                            icon: "error",
+                            title: response.data.msg,
+                        });
+                        console.log(response);
+                    }
+                })
+                .catch((error) => {
+                    console.log("ERROR:: ", error.response.data);
+                    // serErrors(error.response.data.errors);
                     Toast.fire({
                         icon: "error",
-                        title: response.data.msg,
+                        title: error.response.data.msg,
                     });
-                    console.log(response);
-                }
-            })
-            .catch((error) => {
-                console.log("ERROR:: ", error.response.data);
-                // serErrors(error.response.data.errors);
-                Toast.fire({
-                    icon: "error",
-                    title: error.response.data.msg,
-                });
 
+                });
+        }
+        else {
+            Toast.fire({
+                icon: "error",
+                title: "Invaild Invoice Number",
             });
+        }
+
 
     }
     const handleDelete = (e) => {
         const status = { status: 'Rejected' }
         e.preventDefault();
-        axios.put(`https://sbexpressbd.com/Server/balance/update/${data._id}`, status)
+
+
+        axios.put(`http://localhost:5000/balance/update/${data._id}`, status)
 
             .then(function (response) {
                 console.log(response);
                 if (response.status === 200) {
                     setCall(!call);
+                    setCall1(!call1);
                     Toast.fire({
                         icon: "success",
                         title: response.data.msg,
@@ -114,14 +127,14 @@ const UpdateBalanceModal = ({ data, call, setCall }) => {
                         <form ref={form} >
                             <div class="modal-body pending-modal">
 
-                                <label htmlFor="">Mobile Number</label>
+                                <label htmlFor="">Merchant Name</label>
 
                                 <input
                                     className="form-control"
-                                    type="number"
+                                    type="text"
                                     name=""
                                     id=""
-                                    value={data?.user?.number}
+                                    value={data?.user?.name}
                                     disabled
                                 />
                                 <label htmlFor="">Amount</label>
@@ -134,13 +147,14 @@ const UpdateBalanceModal = ({ data, call, setCall }) => {
                                     disabled
                                 />
 
-                                <label htmlFor="">Pin</label>
+                                <label htmlFor="">Invoice</label>
                                 <input
                                     className="form-control"
                                     type="number"
-                                    name=""
+                                    name="invoice"
                                     id=""
-                                    placeholder="Enter Pin"
+
+                                    placeholder="Enter Invoice Number"
                                 />
                                 <label htmlFor="">Note</label>
                                 <textarea
