@@ -1,28 +1,87 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import useAuth from "../../../Hooks/useAuth";
 import Header from '../../../pages/Header';
 import Footer from "../../Footer/Footer";
 
 const Dashboard = () => {
+  const { user } = useAuth()
   return (
     <div>
       <Header />
       <div className="content-wrapper">
         <div className="content-header">
           <div className="container-fluid">
-         
+
             <div className="d-flex justify-content-between">
               <h3 className="m-0 text-dark">Quick Access</h3>
-         
-
             </div>
+
             <hr className="quick-hr" />
+            <section className="content">
+              <div className="container-fluid">
+                <div className="row g-1">
+
+                  <div className="col-lg-3 col-md-6 col-6">
+                    <Link to="/admin/pending-recharge">
+                      <div className="small-box inner-p bg-light shadow">
+                        <div className="inner">
+                          <h4>Pending Recharge</h4>
+                          <h3>{user.total_pending}</h3>
+                          <p>Total Amount: {user.pending_recaharge}৳</p>
+                        </div>
+                        <div className="icon text-info">
+                          <i class="fas fa-dollar-sign"></i>
+                        </div>
+                      </div></Link>
+                  </div>
+                  <div className="col-lg-3 col-md-6 col-6">
+                    <Link to="/admin/pending-mobile-banking">
+                      <div className="small-box inner-p bg-light shadow">
+                        <div className="inner">
+                          <h4>Pending Mobile Banking</h4>
+                          <h3>{user.mobileBCount}</h3>
+                          <p>Total Amount: {user.pending_Mobile_Banking_Amount}৳</p>
+                        </div>
+                        <div className="icon text-success">
+                          <i class="fas fa-mobile-alt"></i>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                  <div className="col-lg-3 col-md-6 col-6">
+                    <div className="small-box inner-p bg-light shadow">
+                      <div className="inner">
+                        <h4>Pending Sim Purchase</h4>
+                        <h3>150</h3>
+                        <p>Total Amount: 1000৳</p>
+                      </div>
+                      <div className="icon text-warning">
+                        <i class="fas fa-sim-card"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-3 col-md-6 col-6">
+                    <div className="small-box inner-p bg-light shadow">
+                      <div className="inner">
+                        <h4>Pending Direct Bank</h4>
+                        <h3>150</h3>
+                        <p>Total Amount: 1000৳</p>
+                      </div>
+                      <div className="icon text-danger">
+                        <i class="fas fa-university"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
         </div>
 
         {/* Add all  */}
 
-       
+
 
         {/* recharge point info */}
 
@@ -90,6 +149,7 @@ const Dashboard = () => {
             </div>
           </div>
         </section>
+
 
         {/* Mobile Banking Point Information  */}
         <div className="content-header">

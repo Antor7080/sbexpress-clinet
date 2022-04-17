@@ -197,8 +197,8 @@ const AddSimPurchase = () => {
               <div className="col-lg-8 col-md-8">
                 <div class="row">
                   <div class="col-md-12 mb-3">
-                    <div class="card">
-                      <div class="card-body table-responsive">
+                    <div class=" card table-responsive">
+                      <div class=" card table-responsive-body table-responsive">
                         <MDBDataTable
                           className="text-center"
                           bordered

@@ -64,7 +64,7 @@ const AllRecharge = () => {
                 <div class="spinner-border text-center text-danger" style={{ width: "13rem", height: '13rem' }} role="status">
                   <span class="sr-only text-danger">Loading...</span>
                 </div>
-              </div> : <div class="card">
+              </div> : <div class=" card table-responsive">
                 <table className="table table-bordered text-center">
                   <thead style={{ backgroundColor: "#ededed" }}>
                     <tr>
@@ -74,8 +74,11 @@ const AllRecharge = () => {
                       <th scope="col">Shop Name</th>
                       <th scope="col">Operator</th>
                       <th scope="col">Contact Number</th>
+
                       <th scope="col">Status</th>
-                      <th scope="col">Updated Date</th>
+
+                      <th scope="col">Updated</th>
+                      <th scope="col">Time</th>
 
                     </tr>
                   </thead>
@@ -92,7 +95,11 @@ const AllRecharge = () => {
                         <td>{data.simOperator}</td>
                         <td>{data.user.number}</td>
                         <td>{data.status}</td>
-                        <td>{new Date(displayrechargeData[0].updatedAt).toLocaleDateString()} </td>
+
+
+                        <td>{new Date(data.updatedAt).toLocaleDateString("en-GB")}</td>
+                        <td>{new Date(data.updatedAt).toLocaleTimeString("en-GB")}</td>
+
                         {/*  <td>
                             <div className="d-flex align-items-center pending-button">
                               <button

@@ -1,27 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import useAuth from "../../../Hooks/useAuth";
 import Header from '../../../pages/Header';
 import Footer from "../../Footer/Footer";
 
-const adsdata = [
-
-
-
-  {
-    name: "Ads name",
-    date: "10-02-2022",
-    amount: "10",
-  },
-  {
-    name: "Ads name",
-    date: "10-02-2022",
-    amount: "10",
-  },
-];
-
-
 
 const ViewMerchant = () => {
+
   const { id } = useParams()
   const [merchantData, setMerchantData] = useState([]);
   useEffect(() => {
@@ -29,7 +14,9 @@ const ViewMerchant = () => {
       .then(res => res.json())
       .then(data => setMerchantData(data))
   }, [id]);
-  console.log(merchantData);
+
+
+
   return (
     <div>
       <Header />
@@ -44,7 +31,7 @@ const ViewMerchant = () => {
                   <div className="d-flex align-middle align-items-center justify-content-between">
                     <div className="me-3">
                       <img
-                        src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+                        src={`http://localhost:5000/uploads/${merchantData.avatar}`}
                         alt=""
                         style={{ height: "100px", width: "100px" }}
                       />
@@ -56,7 +43,7 @@ const ViewMerchant = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-3 col-md-3">
+              {/*     <div className="col-lg-3 col-md-3">
                 <div className="p-2 view-top">
                   <h4>Today Balance</h4>
                   <p>12000</p>
@@ -73,12 +60,14 @@ const ViewMerchant = () => {
                   <h4>Total Income</h4>
                   <p>12000</p>
                 </div>
-              </div>
+              </div> */}
             </div>
+            <h4 className="text-center">Merchant Info</h4>
             <div className="row g-2 view-bottom">
-              <div className="col-lg-8 col-md-8">
+
+              <div className="col-lg-6 col-md-6">
                 <div className="p-2 view-bottom-left">
-                  <h4>Merchant Info</h4>
+
                   <table className="table table-borderless">
                     <tbody>
                       <tr>
@@ -94,8 +83,28 @@ const ViewMerchant = () => {
                         <td>{merchantData.number}</td>
                       </tr>
                       <tr>
-                        <td>Email</td>
-                        <td>{merchantData.email}</td>
+                        <td>user address</td>
+                        <td>{merchantData.user_address}</td>
+                      </tr>
+                      <tr>
+                        <td>shope name</td>
+                        <td>{merchantData.shope_name}</td>
+                      </tr>
+                      <tr>
+                        <td>shop address</td>
+                        <td>{merchantData.shop_address}</td>
+                      </tr>
+                      <tr>
+                        <td>passport no</td>
+                        <td>{merchantData.passport_no}</td>
+                      </tr>
+                      <tr>
+                        <td>reference number</td>
+                        <td>{merchantData.r_number}</td>
+                      </tr>
+                      <tr>
+                        <td>reference address</td>
+                        <td>{merchantData.r_address}</td>
                       </tr>
 
                     </tbody>
@@ -103,44 +112,59 @@ const ViewMerchant = () => {
                   <button className="btn button-common-color">Download Report</button>
                 </div>
               </div>
-              <div className="col-lg-4 col-md-4">
+              <div className="col-lg-6 col-md-6">
+                <div className="p-2 view-bottom-left">
 
-                <div className="p-3 view-bottom-right-bottom mt-2">
-                  <h4>Last Balance Request</h4>
-                  <div class="table-responsive table-bordered">
-                    <table id="example" class="table" style={{ width: "100%" }}>
-                      <thead>
-                        <tr>
-                          <th>
-                            <input type="checkbox" name="" id="" />
-                          </th>
-                          <th>Ads Name</th>
-                          <th>Date</th>
-                          <th>Amount</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {adsdata.map((d) => (
-                          <tr>
-                            <td>
-                              <input type="checkbox" name="" id="" />
-                            </td>
-                            <td>{d.name}</td>
-                            <td>{d.date}</td>
-                            <td>{d.amount}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
+                  <table className="table table-borderless">
+                    <tbody>
+
+                      <tr>
+                        <td>bank name</td>
+                        <td>{merchantData.bank_name}</td>
+                      </tr>
+                      <tr>
+                        <td>account name</td>
+                        <td>{merchantData.account_name}</td>
+                      </tr>
+                      <tr>
+                        <td>account number</td>
+                        <td>{merchantData.account_number}</td>
+                      </tr>
+                      <tr>
+                        <td>bank brance name</td>
+                        <td>{merchantData.bank_b_name}</td>
+                      </tr>
+                      <tr>
+                        <td>switt code</td>
+                        <td>{merchantData.switt_code}</td>
+                      </tr>
+                      <tr>
+                        <td>bkash</td>
+                        <td>{merchantData.bkash}</td>
+                      </tr>
+                      <tr>
+                        <td>nagad</td>
+                        <td>{merchantData.nagad}</td>
+                      </tr>
+                      <tr>
+                        <td>rocket</td>
+                        <td>{merchantData.rocket}</td>
+                      </tr>
+                      <tr>
+                        <td>reference name</td>
+                        <td>{merchantData.r_name}</td>
+                      </tr>
+                      <tr>
+                        <td>reference relation</td>
+                        <td>{merchantData.r_relation}</td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+
                 </div>
               </div>
             </div>
-
-
-
-
-
           </div>
         </section>
       </div>

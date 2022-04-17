@@ -2,14 +2,14 @@ import axios from "axios";
 
 import { useEffect, useState } from "react";
 import Swal from 'sweetalert2';
+import Cookies from "js-cookie"
 
 const useFunctions = () => {
     const [call1, setCall1] = useState(true);
     const [loadig, setLoading] = useState(false);
     const [errors, serErrors] = useState("");
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState([])
 
-    const [token, setToken] = useState('')
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -30,10 +30,12 @@ const useFunctions = () => {
                         icon: "success",
                         title: response.data.msg,
                     });
-                    setToken(response.data.accesstoken)
+                    Cookies.set("access", response.data.accesstoken )
+                    Cookies.set("refrash", response.data.refreshtoken )
                     localStorage.setItem("user", JSON.stringify(response.data.userData))
                     localStorage.setItem("token", response.data.accesstoken);
-                    setToken(response.data.accesstoken)
+
+
                     if (response.data.userData.role === 1) {
                         items.history.push("admin/dashboard");
                     }
@@ -48,7 +50,7 @@ const useFunctions = () => {
                             title: "You have no permission to login",
                         });
                     }
-                    window.location.reload();
+                    // window.location.reload();
                 }
             })
             .catch((error) => {
@@ -66,14 +68,13 @@ const useFunctions = () => {
             });
 
 
-        axios.get("http://localhost:5000/user/infor", {
-            headers: {
-                'Authorization': token
-            }
-        })
-            .then(res => console.log(res))
+
 
     }
+    axios.get("http://localhost:5000/user/refresh_token", { withCredentials: true })
+        .then(res => console.log(res))
+
+        
 
     const logout = (history) => {
         axios.get("http://localhost:5000/user/logout")
@@ -103,9 +104,7 @@ const useFunctions = () => {
             }
         })
             .then(data => setUser(data.data))
-    }, [userData?._id, token1]);
-
-    console.log(user);
+    }, [userData?._id, token1, call1]);
     return {
         setLoading,
         loadig,

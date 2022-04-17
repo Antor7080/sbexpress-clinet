@@ -59,7 +59,93 @@ const EditBalanceModal = ({ data, call, setCall }) => {
 
   return (
     <div>
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content ">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                View Only
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form ref={form} >
+              <div class="modal-body pending-modal">
 
+                <label htmlFor="">Merchant Name</label>
+
+                <input
+                  className="form-control"
+                  type="text"
+                  name=""
+                  id=""
+                  value={data?.user?.name}
+                  disabled
+                />
+                <label htmlFor="">Amount</label>
+                <input
+                  className="form-control"
+                  type="number"
+                  name=""
+                  id=""
+                  value={data.amount}
+                  disabled
+                />
+
+                <label htmlFor="">Invoice</label>
+                <input
+                  className="form-control"
+                  type="number"
+                  name="invoice"
+                  id=""
+                  disabled
+                  placeholder="Enter Invoice Number"
+                />
+                <label htmlFor="">Note</label>
+                <textarea
+                  disabled
+                  className="form-control"
+                  type="text"
+                  name="note"
+                  id=""
+                  placeholder='Enter Your Message to The Merchent'
+
+                />
+
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-danger border border-danger"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                {/*  <button
+                  onClick={submit}
+                  type="button"
+                  class="btn btn-primary button-common-color"
+                  data-dismiss="modal"
+                >
+                  Submit
+                </button> */}
+              </div>
+            </form>
+          </div>
+        </div>
+      </div >
 
       <div
         class="modal fade"
@@ -121,6 +207,7 @@ const EditBalanceModal = ({ data, call, setCall }) => {
                   Close
                 </button>
                 <button
+                  data-dismiss="modal"
                   type="button"
                   class="btn btn-primary button-common-color"
                   onClick={submit}

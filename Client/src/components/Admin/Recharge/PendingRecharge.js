@@ -77,7 +77,7 @@ const PendingRecharge = () => {
                     onChange={handleSearch}
                     placeholder="Search"
                   />
-                  <div class="card">
+                  <div class=" card table-responsive">
                     <table className="table table-bordered text-center">
                       <thead style={{ backgroundColor: "#ededed" }}>
                         <tr>
@@ -86,7 +86,10 @@ const PendingRecharge = () => {
                           <th scope="col">Amount</th>
                           <th scope="col">Shop Name</th>
                           <th scope="col">Operator</th>
-                          <th scope="col">Contact Number</th>
+                          <th scope="col">Number</th>
+
+                          <th scope="col">Updated</th>
+                          <th scope="col">Time</th>
                           <th scope="col">Status</th>
                           <th scope="col">Action</th>
                         </tr>
@@ -103,6 +106,8 @@ const PendingRecharge = () => {
                             <td>{data.user.shope_name}</td>
                             <td>{data.simOperator}</td>
                             <td>{data.user.number}</td>
+                            <td>{new Date(data.updatedAt).toLocaleDateString("en-GB")}</td>
+                            <td>{new Date(data.updatedAt).toLocaleTimeString("en-GB")}</td>
                             <td>{data.status}</td>
                             <td>
                               <div className="d-flex align-items-center pending-button">

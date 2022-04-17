@@ -77,61 +77,70 @@ const BalanceRequest = () => {
                     <div class="spinner-border text-center text-danger" style={{ width: "13rem", height: '13rem' }} role="status">
                       <span class="sr-only text-danger">Loading...</span>
                     </div>
-                  </div> : <div class="card">
-                    <table className="table table-bordered text-center">
-                      <thead style={{ backgroundColor: "#ededed" }}>
-                        <tr>
-                          <th scope="col">Invoice</th>
-                          <th scope="col">Name</th>
-                          <th scope="col">Amount</th>
-                          <th scope="col">Shop Name</th>
-                          <th scope="col">Payment Method</th>
-                          <th scope="col">Contact Number</th>
-                          <th scope="col">Status</th>
-                          <th scope="col">Action</th>
-
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {displayBalanceData.length === 0 && (
-                          <p className="text-danger text-center">No data found!</p>
-                        )}
-                        {displayBalanceData && displayBalanceData.map((data) => (
-                          <tr key={data.invoice}>
-                            <td>{data.invoice}</td>
-                            <td>{data.user.name}</td>
-                            <td>{data.amount}</td>
-                            <td>{data.user.shope_name}</td>
-                            <td>{data.payment_method}</td>
-                            <td>{data.user.number}</td>
-                            <td>{data.status}</td>
-                            <td>
-                              <div className="d-flex align-items-center pending-button">
-                                <button
-                                  type="button"
-                                  class="btn btn-success"
-                                  data-toggle="modal"
-                                  data-target="#exampleModal"
-                                  onClick={() => { modalData(data._id) }}
-                                >
-                                  Confirm
-                                </button>
-                                <button
-                                  type="button"
-                                  class="btn btn-danger"
-                                  data-toggle="modal"
-                                  data-target="#exampleModal2"
-                                  onClick={() => { modalData(data._id) }}
-                                >
-                                  Delete
-                                </button>
-                              </div>
-                            </td>
+                  </div> : <div class=" card table-responsive">
+                    <div className="table-responsive">
+                      <table className="table table-bordered text-center">
+                        <thead style={{ backgroundColor: "#ededed" }}>
+                          <tr>
+                            <th scope="col">Invoice</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Shop Name</th>
+                            <th scope="col">Payment_Method</th>
+                            <th scope="col"> Number</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
                           </tr>
-                        ))}
+                        </thead>
+                        <tbody>
+                          {displayBalanceData.length === 0 && (
+                            <p className="text-danger text-center">No data found!</p>
+                          )}
+                          {displayBalanceData && displayBalanceData.map((data) => (
+                            <tr key={data.invoice}>
+                              <td>{data.invoice}</td>
+                              <td>{data.user.name}</td>
+                              <td>{data.amount}</td>
+                              <td>{data.user.shope_name}</td>
+                              <td>{data.payment_method}</td>
+                              <td>{data.user.number}</td>
+                              <td>{new Date(data.createdAt).toLocaleDateString("en-GB")}
+                              </td>
+                              <td>
+                                {
+                                  new Date(data.createdAt).toLocaleTimeString("en-GB")
+                                }</td>
+                              <td>{data.status}</td>
+                              <td>
+                                <div className="d-flex align-items-center pending-button">
+                                  <button
+                                    type="button"
+                                    class="btn btn-success"
+                                    data-toggle="modal"
+                                    data-target="#exampleModal"
+                                    onClick={() => { modalData(data._id) }}
+                                  >
+                                    Confirm
+                                  </button>
+                                  <button
+                                    type="button"
+                                    class="btn btn-danger"
+                                    data-toggle="modal"
+                                    data-target="#exampleModal2"
+                                    onClick={() => { modalData(data._id) }}
+                                  >
+                                    Delete
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          ))}
 
-                      </tbody>
-                    </table>
+                        </tbody>
+                      </table>
+                    </div>
                     <UpdateBalanceModal call={call} setCall={setCall} data={data1} ></UpdateBalanceModal>
                     <nav aria-label="Page navigation example">
                       <ul className="pagination">

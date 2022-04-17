@@ -70,7 +70,7 @@ const BalanceRequest = () => {
                       <span class="sr-only text-danger">Loading...</span>
                     </div>
                   </div> :
-                    <div class="card">
+                    <div class=" card table-responsive">
                       <div className="table-responsive">
                         <table className="table table-bordered text-center">
                           <thead style={{ backgroundColor: "#ededed" }}>
@@ -83,7 +83,7 @@ const BalanceRequest = () => {
                               <th scope="col">Contact Number</th>
                               <th scope="col">Created At</th>
                               <th scope="col">Time</th>
-                           
+
                               <th scope="col">Status</th>
 
 

@@ -177,7 +177,7 @@ const AddBalance = () => {
                         onChange={handleSearch}
                         placeholder="Search"
                       />
-                      <div class="card">
+                      <div class=" card table-responsive">
                         <div className="table-responsive">
                           <table className="table table-bordered text-center" >
                             <thead style={{ backgroundColor: "#ededed" }}>

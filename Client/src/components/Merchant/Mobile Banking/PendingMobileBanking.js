@@ -1,273 +1,159 @@
-import { MDBDataTable } from "mdbreact";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from '../../../pages/Header';
 import Footer from "../../Footer/Footer";
 
-const data = {
-  columns: [
-    {
-      label: "Sl",
-      field: "sl",
-      sort: "asc",
-    },
-    {
-      label: "Id",
-      field: "id",
-      sort: "asc",
-    },
-    {
-      label: "Phone Number",
-      field: "phone",
-      sort: "asc",
-    },
-    {
-      label: "Amounts",
-      field: "amounts",
-      sort: "asc",
-    },
-    {
-      label: "Service",
-      field: "service",
-      sort: "asc",
-    },
-    {
-      label: "Type",
-      field: "type",
-      sort: "asc",
-    },
-    {
-      label: "Merchant Name",
-      field: "merchant",
-      sort: "asc",
-    },
-    {
-      label: "Created Time",
-      field: "created",
-      sort: "asc",
-    },
-    {
-      label: "Status",
-      field: "status",
-      sort: "asc",
-    },
-    {
-      label: "Action",
-      field: "action",
-      sort: "asc",
-    },
-  ],
-  rows: [
-    {
-      sl: "1",
-      id: "1",
-      phone: "+8801634289096",
-      amounts: "1020",
-      service: "Bkash",
-      type: "Personal",
-      merchant: "Antor",
-      created: "2022-02-09",
-      status: "pending",
-      action: (
-        <div className="d-flex align-items-center pending-button">
-          <button
-            type="button"
-            class="btn btn-success"
-            data-toggle="modal"
-            data-target="#exampleModal"
-          >
-            Confirm
-          </button>
-
-          <div
-            class="modal fade"
-            id="exampleModal"
-            tabindex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-          >
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content ">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">
-                    Confirm
-                  </h5>
-                  <button
-                    type="button"
-                    class="close"
-                    data-dismiss="modal"
-                    aria-label="Close"
-                  >
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body pending-modal">
-                  <label htmlFor="">Mobile Number</label>
-                  <input
-                    className="form-control"
-                    type="number"
-                    name=""
-                    id=""
-                    value="01634134415"
-                    disabled
-                  />
-                  <label htmlFor="">Amount</label>
-                  <input
-                    className="form-control"
-                    type="number"
-                    name=""
-                    id=""
-                    value="1000"
-                    disabled
-                  />
-                  <label htmlFor="">Pin</label>
-                  <input
-                    className="form-control"
-                    type="number"
-                    name=""
-                    id=""
-                    placeholder="Enter Pin"
-                  />
-                  <label htmlFor="">Service</label>
-                  <input
-                    className="form-control"
-                    type="text"
-                    name=""
-                    id=""
-                    value="Bkash"
-                    disabled
-                  />
-                </div>
-                <div class="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-danger border border-danger"
-                    data-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-primary button-common-color"
-                  >
-                    Submit
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <button
-            type="button"
-            class="btn btn-danger"
-            data-toggle="modal"
-            data-target="#exampleModal2"
-          >
-            Delete
-          </button>
-
-          <div
-            class="modal fade"
-            id="exampleModal2"
-            tabindex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-          >
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content ">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">
-                    Are you want sure to delete?
-                  </h5>
-                  <button
-                    type="button"
-                    class="close"
-                    data-dismiss="modal"
-                    aria-label="Close"
-                  >
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-
-                <div class="modal-footer border-0">
-                  <button
-                    type="button"
-                    className="btn btn-danger border border-danger"
-                    data-dismiss="modal"
-                  >
-                    No
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-primary button-common-color"
-                  >
-                    Yes
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      ),
-    },
-  ],
-};
-
 const PendingMobileBanking = () => {
+  const [loading, setLoading] = useState(false);
+  const [balanceData, setBalanceData] = useState([]);
+  const [displayBalanceData, setDisplayBalanceData] = useState([]);
+  const [page, setPage] = useState(1);
+  const [pageCount, setPageCount] = useState(0);
+
+  const Authorization = localStorage.getItem("token")
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const userInfo = localStorage.getItem('user')
+  const userData = (JSON.parse(userInfo))
+  const config = {
+    headers: {
+      Authorization
+    }
+  };
+  useEffect(() => {
+    setLoading(true)
+    fetch(`http://localhost:5000/mobile-banking?status=Pending&page=${page}&email=${userData.email}`, config)
+      .then(res => res.json())
+      .then(data => {
+        setBalanceData(data.data);
+        setDisplayBalanceData(data.data)
+        const count = data.total;
+        const pageNumber = Math.ceil(count / 10);
+        setPageCount(pageNumber);
+        setLoading(false)
+      })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page])
+
+
+  const handleSearch = (e) => {
+    const searchText = e.target.value;
+    const matchedData = balanceData.filter((data) =>
+      data.user.name.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setDisplayBalanceData(matchedData);
+
+  };
+
   return (
     <div>
       <Header />
       <div className="content-wrapper">
         <section className="content">
           <div className="container-fluid pt-3">
-            <h3>Pending Mobile Banking</h3>
+            <h3 >Pending Mobile Banking  Request</h3>
             <hr />
-            <div className="row my-3 gx-1">
-              <div className="col-lg-2">
-                <label htmlFor="">Number</label>
-                <input className="form-control" type="number" name="" id="" />
+            {
+              loading ? <div className="text-center">
+                <div class="spinner-border text-center text-danger" style={{ width: "13rem", height: '13rem' }} role="status">
+                  <span class="sr-only text-danger">Loading...</span>
+                </div>
+              </div> : <div class="row">
+                <div class="col-md-12 mb-3">
+                  <input
+                    className="form-control mb-3"
+                    style={{ width: "30%" }}
+                    type="text"
+                    name=""
+                    id=""
+                    onChange={handleSearch}
+                    placeholder="Search"
+                  />
+                  <div class=" card table-responsive">
+                    <table className="table table-bordered text-center">
+                      <thead style={{ backgroundColor: "#ededed" }}>
+                        <tr>
+                          <th scope="col">Invoice</th>
+                          <th scope="col">Type</th>
+                          <th scope="col">Amount</th>
+                          <th scope="col">Name</th>
+                          <th scope="col">Operator</th>
+                          <th scope="col">Number</th>
+                          <th scope="col">Updated</th>
+                          <th scope="col">Time</th>
+                          <th scope="col">Status</th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {displayBalanceData?.length === 0 && (
+                          <p className="text-danger text-center">No data found!</p>
+                        )}
+                        {displayBalanceData && displayBalanceData.map((data) => (
+                          <tr key={data.invoice}>
+                            <td>{data.invoice}</td>
+                            <td>{data.type}</td>
+                            <td>{data.amount}</td>
+                            <td>{data.user.name}</td>
+                            <td>{data.Mobile_Banking_Operator}</td>
+                            <td>{data.user.number}</td>
+                            <td>{new Date(data.updatedAt).toLocaleDateString("en-GB")}</td>
+                            <td>{new Date(data.updatedAt).toLocaleTimeString("en-GB")}</td>
+                            <td>{data.status}</td>
+
+                          </tr>
+                        ))}
+
+                      </tbody>
+                    </table>
+
+                    <nav aria-label="Page navigation example">
+                      <ul className="pagination">
+                        <li className="page-item">
+                          <a
+                            type="button"
+                            onClick={() => setPage(page - 1)}
+                            className={
+                              page === 1 ? "page-link btn disabled" : "page-link btn"
+                            }
+                            href
+                          >
+                            Previous
+                          </a>
+                        </li>
+
+                        {[...Array(pageCount).keys()].map((number) => (
+                          <li className="page-item" key={number}>
+                            <button
+                              onClick={() => setPage(number + 1)}
+                              className={
+                                page === number + 1
+                                  ? " btn pagination-btn btn-success"
+                                  : "page-link btn pagination-btn"
+                              }
+                            >
+                              {number + 1}
+                            </button>
+                          </li>
+                        ))}
+
+                        <li className="page-item">
+                          <a
+                            onClick={() => setPage(page + 1)}
+                            className={
+                              page === pageCount
+                                ? "page-link btn disabled"
+                                : "page-link btn"
+                            }
+                            href
+                          >
+                            Next
+                          </a>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
               </div>
-              <div className="col-lg-2">
-                <label htmlFor="">Merchant</label>
-                <select className="form-control" name="" id="">
-                  <option value="">Select Merchant</option>
-                  <option value="">Antor</option>
-                  <option value="">Jahid</option>
-                </select>
-              </div>
-              <div className="col-lg-2">
-                <label htmlFor="">Service</label>
-                <select className="form-control" name="" id="">
-                  <option value="">Any</option>
-                  <option value="">Bkash</option>
-                  <option value="">Rocket</option>
-                </select>
-              </div>
-              <div className="col-lg-2">
-                <label htmlFor="">Status</label>
-                <select className="form-control" name="" id="">
-                  <option value="">Select Status</option>
-                  <option value="">Pending</option>
-                </select>
-              </div>
-              <div className="col-lg-2">
-                <label htmlFor="">From Date</label>
-                <input className="form-control" type="date" name="" id="" />
-              </div>
-              <div className="col-lg-2">
-                <label htmlFor="">To Date</label>
-                <input className="form-control" type="date" name="" id="" />
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-body table-responsive">
-                <MDBDataTable
-                  className=" pending-table"
-                  bordered
-                  hover
-                  data={data}
-                />
-              </div>
-            </div>
+            }
           </div>
         </section>
       </div>

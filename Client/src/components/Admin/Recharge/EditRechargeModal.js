@@ -21,7 +21,6 @@ const EditRechargeModal = ({ data, call, setCall }) => {
     const submit = e => {
         e.preventDefault();
         const formdata = new FormData(form.current);
-
         formdata.forEach(function (value, key) {
             object[key] = value;
         });
@@ -29,7 +28,6 @@ const EditRechargeModal = ({ data, call, setCall }) => {
         axios.put(`http://localhost:5000/recharge/update/${data._id}`, object)
 
             .then(function (response) {
-                console.log(response);
                 if (response.status === 200) {
                     setCall(!call)
                     Toast.fire({
@@ -63,6 +61,78 @@ const EditRechargeModal = ({ data, call, setCall }) => {
 
             <div
                 class="modal fade"
+                id="exampleModal"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+            >
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content ">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                Pending Recharge
+                            </h5>
+                            <button
+                                type="button"
+                                class="close"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                            >
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form ref={form}  >
+                            <div class="modal-body pending-modal">
+                                <label htmlFor="">Name</label>
+                                <input
+                                    className="form-control"
+                                    type="text"
+                                    name=""
+                                    id=""
+                                    value={data?.user?.name}
+                                    disabled
+                                />
+                                <label htmlFor="">Amount</label>
+                                <input
+                                    className="form-control"
+                                    type="number"
+                                    name=""
+                                    id=""
+                                    value={data.amount}
+                                    disabled
+                                />
+                                <label htmlFor="">Note</label>
+                                <textarea
+                                    className="form-control"
+                                    type="text"
+                                    name="note"
+                                    id=""
+                                    defaultValue={data.note}
+
+                                    placeholder='Enter Your Message to The Merchent'
+
+                                />
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button
+                                    type="button"
+                                    className="btn btn-danger border border-danger"
+                                    data-dismiss="modal"
+                                >
+                                    Close
+                                </button>
+
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div >
+
+            <div
+                class="modal fade"
                 id="exampleModal2"
                 tabindex="-1"
                 aria-labelledby="exampleModalLabel"
@@ -90,12 +160,23 @@ const EditRechargeModal = ({ data, call, setCall }) => {
                             <div className="modal-body ">
                                 <label htmlFor="name">Name</label>
                                 <input className="form-control" type="text" name="" id="name" value={data?.user?.name} disabled />
-                                <label htmlFor="s-name">Shop Name</label>
-                                <input className="form-control" type="text" name="" id="s-name" value={data?.user?.shope_name} disabled />
+
                                 <label htmlFor="amount">Amount</label>
-                                <input className="form-control" type="number" name="amount" id="amount" defaultValue={data?.amount} />
+                                <input className="form-control" type="text" name="amount" id="amount" defaultValue={data?.amount} />
                                 <label htmlFor="contact">Contact Number</label>
                                 <input className="form-control" type="number" name="" id="contact" value={data?.user?.number} disabled />
+
+                                <label htmlFor="">Note</label>
+                                <textarea
+                                    className="form-control"
+                                    type="text"
+                                    name="note"
+                                    id=""
+                                    defaultValue={data.note}
+
+                                    placeholder='Enter Your Message to The Merchent'
+
+                                />
                                 <label htmlFor="status">Status</label>
                                 <select
 

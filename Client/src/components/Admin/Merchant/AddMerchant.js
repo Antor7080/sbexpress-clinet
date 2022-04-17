@@ -29,9 +29,11 @@ const AddMerchant = () => {
     axios.post('http://localhost:5000/user/register', formdata)
       .then(function (response) {
         if (response.status === 200) {
+          setError("")
+          setData({})
           Toast.fire({
             icon: "success",
-            title: response.data.msg,
+            title: "Account create successfull!!",
           });
         }
         else if (response.status === 400) {

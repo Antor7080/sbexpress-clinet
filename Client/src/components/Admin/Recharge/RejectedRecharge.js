@@ -75,7 +75,7 @@ const RejectedRecharge = () => {
                 <div class="spinner-border text-center text-danger" style={{ width: "13rem", height: '13rem' }} role="status">
                   <span class="sr-only text-danger">Loading...</span>
                 </div>
-              </div> : <div class="card">
+              </div> : <div class=" card table-responsive">
                 <table className="table table-bordered text-center">
                   <thead style={{ backgroundColor: "#ededed" }}>
                     <tr>
@@ -86,6 +86,8 @@ const RejectedRecharge = () => {
                       <th scope="col">Operator</th>
                       <th scope="col">Contact Number</th>
                       <th scope="col">Status</th>
+                      <th scope="col">Updated</th>
+                      <th scope="col">Time</th>
                       <th scope="col">Action</th>
 
                     </tr>
@@ -102,6 +104,10 @@ const RejectedRecharge = () => {
                         <td>{data.user.shope_name}</td>
                         <td>{data.simOperator}</td>
                         <td>{data.user.number}</td>
+
+
+                        <td>{new Date(data.updatedAt).toLocaleDateString("en-GB")}</td>
+                        <td>{new Date(data.updatedAt).toLocaleTimeString("en-GB")}</td>
                         <td>{data.status}</td>
                         <td>
                           <div className="d-flex align-items-center pending-button">
@@ -136,7 +142,7 @@ const RejectedRecharge = () => {
                   </tbody>
                 </table>
                 <EditRechargeModal data={data1} call={call} setCall={setCall} ></EditRechargeModal>
-                <UpdateRechargeModal data={data1} call={call} setCall={setCall}></UpdateRechargeModal>
+                {/*    <UpdateRechargeModal data={data1} call={call} setCall={setCall}></UpdateRechargeModal> */}
                 <nav aria-label="Page navigation example">
                   <ul className="pagination">
                     <li className="page-item">

@@ -65,7 +65,7 @@ const AllBalance = () => {
                     <div class="spinner-border text-center text-danger" style={{ width: "13rem", height: '13rem' }} role="status">
                       <span class="sr-only text-danger">Loading...</span>
                     </div>
-                  </div> : <div class="card">
+                  </div> : <div class=" card table-responsive">
                     <div className="table-responsive">
                       <table className="table table-bordered text-center">
                         <thead style={{ backgroundColor: "#ededed" }}>
@@ -74,11 +74,11 @@ const AllBalance = () => {
                             <th scope="col">Name</th>
                             <th scope="col">Amount</th>
                             <th scope="col">Shop Name</th>
-                            <th scope="col">Payment Method</th>
-                            <th scope="col">Contact Number</th>
+                            <th scope="col">Payment_Method</th>
+                            <th scope="col">Number</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Updated Date</th>
-                            <th scope="col">Updated time</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">time</th>
 
                           </tr>
                         </thead>
@@ -95,8 +95,8 @@ const AllBalance = () => {
                               <td>{data.payment_method}</td>
                               <td>{data.user.number}</td>
                               <td>{data.status}</td>
-                              <td>{new Date(balanceData[0].updatedAt).toLocaleDateString()} </td>
-                              <td>{new Date(balanceData[0].updatedAt).toLocaleTimeString()} </td>
+                              <td>{new Date(data.updatedAt).toLocaleDateString("en-GB")}</td>
+                              <td>{new Date(data.updatedAt).toLocaleTimeString("en-GB")}</td>
 
                             </tr>
                           ))}

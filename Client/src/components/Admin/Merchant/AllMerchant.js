@@ -87,7 +87,7 @@ const AllMerchant = () => {
                     <div class="spinner-border text-center text-danger" style={{ width: "13rem", height: '13rem' }} role="status">
                       <span class="sr-only text-danger">Loading...</span>
                     </div>
-                  </div> : <div class="card">
+                  </div> : <div class=" card table-responsive">
                     <div className="table-responsive">
                       <table className="table table-bordered text-center">
                         <thead style={{ backgroundColor: "#ededed" }}>

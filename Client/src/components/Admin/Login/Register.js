@@ -26,6 +26,8 @@ const Register = () => {
         axios.post('http://localhost:5000/user/register', formdata)
             .then(function (response) {
                 if (response.status === 200) {
+                    setError("")
+                    setData({})
                     Toast.fire({
                         icon: "success",
                         title: "Registered Successfully!",

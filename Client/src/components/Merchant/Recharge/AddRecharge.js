@@ -1,5 +1,4 @@
 import axios from "axios";
-import { MDBDataTable } from "mdbreact";
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -186,7 +185,7 @@ const AddRecharge = () => {
                 <div className="col-lg-8 col-md-8">
                   <div class="row">
                     <div class="col-md-12 mb-3">
-                      <div class="card">
+                      <div class=" card table-responsive">
                         <div className="table-responsive">
                           <table className="table table-bordered text-center">
                             <thead style={{ backgroundColor: "#ededed" }}>
@@ -218,7 +217,7 @@ const AddRecharge = () => {
                                   </td>
                                   <td>
                                     {
-                                      new Date(data.createdAt).toLocaleTimeString()
+                                      new Date(data.createdAt).toLocaleTimeString("en-GB")
                                     }</td>
                                   <td>{data.status}</td>
                                 </tr>

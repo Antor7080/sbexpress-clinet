@@ -74,7 +74,7 @@ const RejectedRecharge = () => {
                     <div class="spinner-border text-center text-danger" style={{ width: "13rem", height: '13rem' }} role="status">
                       <span class="sr-only text-danger">Loading...</span>
                     </div>
-                  </div> : <div class="card">
+                  </div> : <div class=" card table-responsive">
                     <table className="table table-bordered text-center">
                       <thead style={{ backgroundColor: "#ededed" }}>
                         <tr>
@@ -83,7 +83,7 @@ const RejectedRecharge = () => {
                           <th scope="col">Amount</th>
                           <th scope="col">Shop Name</th>
                           <th scope="col">Operator</th>
-                          <th scope="col">Contact Number</th>
+                          <th scope="col">Number</th>
                           <th scope="col">Created At</th>
                           <th scope="col">Time</th>
                           <th scope="col">Status</th>
@@ -102,11 +102,11 @@ const RejectedRecharge = () => {
                             <td>{data.user.shope_name}</td>
                             <td>{data.simOperator}</td>
                             <td>{data.user.number}</td>
-                            <td>{new Date(data.createdAt).toLocaleDateString("en-GB")}
+                            <td>{new Date(data.updatedAt).toLocaleDateString("en-GB")}
                             </td>
                             <td>
                               {
-                                new Date(data.createdAt).toLocaleTimeString()
+                                new Date(data.updatedAt).toLocaleTimeString("en-GB")
                               }</td>
                             <td>{data.status}</td>
                             <td>

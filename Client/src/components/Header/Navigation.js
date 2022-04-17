@@ -1,26 +1,11 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+
+import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 
 const Navigation = () => {
   const history = useHistory()
-  const { logout } = useAuth();
-  const { call1 } = useAuth()
-  const [user, setUserData] = useState({})
-  const token = localStorage.getItem('token')
-  const userInfo = localStorage.getItem('user')
-  const userData = (JSON.parse(userInfo))
-
-  useEffect(() => {
-    axios.get(`http://localhost:5000/user/information/${userData._id}`, {
-      headers: {
-        'Authorization': token,
-      }
-    })
-
-      .then(data => setUserData(data.data))
-  }, [userData._id, token, call1]);
+  const { logout, user } = useAuth();
   return (
     <div>
       <div>

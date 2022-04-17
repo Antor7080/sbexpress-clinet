@@ -62,7 +62,7 @@ const AllBalance = () => {
                     onChange={handleSearch}
                     placeholder="Search"
                   />
-                  <div class="card">
+                  <div class=" card table-responsive">
                     <table className="table table-bordered text-center">
                       <thead style={{ backgroundColor: "#ededed" }}>
                         <tr>
@@ -73,7 +73,8 @@ const AllBalance = () => {
                           <th scope="col">Payment Method</th>
                           <th scope="col">Contact Number</th>
                           <th scope="col">Status</th>
-                          <th scope="col">Updated Date</th>
+                          <th scope="col">Updated</th>
+                          <th scope="col">Time</th>
 
                         </tr>
                       </thead>
@@ -90,7 +91,8 @@ const AllBalance = () => {
                             <td>{data.payment_method}</td>
                             <td>{data.user.number}</td>
                             <td>{data.status}</td>
-                            <td>{new Date(balanceData[0].updatedAt).toLocaleDateString()} </td>
+                            <td>{new Date(data.updatedAt).toLocaleDateString("en-GB")}</td>
+                            <td>{new Date(data.updatedAt).toLocaleTimeString("en-GB")}</td>
                             {/*  <td>
                            <div className="d-flex align-items-center pending-button">
                              <button

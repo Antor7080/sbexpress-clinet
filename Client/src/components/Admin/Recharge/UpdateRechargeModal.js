@@ -1,8 +1,9 @@
 import React, { useRef } from 'react';
 import Swal from "sweetalert2";
 import axios from "axios";
+import useAuth from '../../../Hooks/useAuth';
 const UpdateRechargeModal = ({ data, call, setCall }) => {
-
+    const { call1, setCall1 } = useAuth()
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -20,47 +21,42 @@ const UpdateRechargeModal = ({ data, call, setCall }) => {
     const submit = e => {
         e.preventDefault();
         const formdata = new FormData(form.current);
-
+        formdata.append("status", "Approved")
         formdata.forEach(function (value, key) {
             object[key] = value;
         });
-        if (parseInt(object.invoice) === data.invoice) {
-            axios.put(`http://localhost:5000/recharge/update/${data._id}`, object)
 
-                .then(function (response) {
+        axios.put(`http://localhost:5000/recharge/update/${data._id}`, object)
+
+            .then(function (response) {
 
 
-                    if (response.status === 200) {
-                        setCall(!call);
-                        Toast.fire({
-                            icon: "success",
-                            title: response.data.msg,
-                        });
-                    }
-                    else if (response.status === 400) {
-                        Toast.fire({
-                            icon: "error",
-                            title: response.data.msg,
-                        });
-                        console.log(response);
-                    }
-                })
-                .catch((error) => {
-                    console.log("ERROR:: ", error.response.data);
-                    // serErrors(error.response.data.errors);
+                if (response.status === 200) {
+                    setCall(!call);
+                    setCall1(!call1)
+                    Toast.fire({
+                        icon: "success",
+                        title: response.data.msg,
+                    });
+                }
+                else if (response.status === 400) {
                     Toast.fire({
                         icon: "error",
-                        title: error.response.data.msg,
+                        title: response.data.msg,
                     });
-
+                    console.log(response);
+                }
+            })
+            .catch((error) => {
+                console.log("ERROR:: ", error.response.data);
+                // serErrors(error.response.data.errors);
+                Toast.fire({
+                    icon: "error",
+                    title: error.response.data.msg,
                 });
-        }
-        else {
-            Toast.fire({
-                icon: "error",
-                title: "Invaild Invoice Number",
+
             });
-        }
+
 
 
     }
@@ -71,9 +67,10 @@ const UpdateRechargeModal = ({ data, call, setCall }) => {
         axios.put(`http://localhost:5000/recharge/update/${data._id}`, status)
 
             .then(function (response) {
-                console.log(response);
+
                 if (response.status === 200) {
                     setCall(!call);
+                    setCall1(!call1)
                     Toast.fire({
                         icon: "success",
                         title: response.data.msg,
@@ -112,7 +109,7 @@ const UpdateRechargeModal = ({ data, call, setCall }) => {
                     <div class="modal-content ">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">
-                                Confirm
+                                Pending Recharge
                             </h5>
                             <button
                                 type="button"
@@ -125,15 +122,13 @@ const UpdateRechargeModal = ({ data, call, setCall }) => {
                         </div>
                         <form ref={form}  >
                             <div class="modal-body pending-modal">
-
                                 <label htmlFor="">Mobile Number</label>
-
                                 <input
                                     className="form-control"
                                     type="text"
                                     name=""
                                     id=""
-                                    value={data?.user?.name}
+                                    value={data?.user?.number}
                                     disabled
                                 />
                                 <label htmlFor="">Amount</label>
@@ -145,16 +140,6 @@ const UpdateRechargeModal = ({ data, call, setCall }) => {
                                     value={data.amount}
                                     disabled
                                 />
-                                <label htmlFor="">Invoice</label>
-                                <input
-                                    className="form-control"
-                                    type="number"
-                                    name="invoice"
-                                    id=""
-                                    placeholder='Enter Invoice Number'
-                                />
-
-
                                 <label htmlFor="">Note</label>
                                 <textarea
                                     className="form-control"
@@ -166,20 +151,6 @@ const UpdateRechargeModal = ({ data, call, setCall }) => {
                                     placeholder='Enter Your Message to The Merchent'
 
                                 />
-                                <label htmlFor="status">Status</label>
-                                <select
-
-                                    className="form-select form-select-sm form-control"
-                                    aria-label=".form-select-sm example"
-                                    id="status"
-                                    name="status"
-                                    aria-describedby="status"
-                                >
-                                    <option defaultValue>{data.status}</option>
-                                    <option value="Approved">Approve</option>
-                                    <option value="Rejected">Reject</option>
-                                    <option value="Pending">Pending</option>
-                                </select>
 
 
                             </div>

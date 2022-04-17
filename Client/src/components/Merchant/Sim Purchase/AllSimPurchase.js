@@ -222,8 +222,8 @@ const AllSimPurchase = () => {
                 <input className="form-control" type="date" name="" id="" />
               </div>
             </div>
-            <div class="card">
-              <div class="card-body table-responsive">
+            <div class=" card table-responsive">
+              <div class=" card table-responsive-body table-responsive">
                 <MDBDataTable
                   className=" pending-table"
                   bordered

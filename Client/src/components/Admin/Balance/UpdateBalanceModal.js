@@ -20,12 +20,11 @@ const UpdateBalanceModal = ({ data, call, setCall }) => {
     const submit = e => {
         e.preventDefault();
         const formdata = new FormData(form.current);
-
+        formdata.append("status", "Approved")
         formdata.forEach(function (value, key) {
             object[key] = value;
         });
-        console.log(typeof (object.invoice))
-        console.log(typeof (data.invoice))
+
         if (parseInt(object.invoice) === data.invoice) {
             axios.put(`http://localhost:5000/balance/update/${data._id}`, object)
 
@@ -165,21 +164,6 @@ const UpdateBalanceModal = ({ data, call, setCall }) => {
                                     placeholder='Enter Your Message to The Merchent'
 
                                 />
-                                <label htmlFor="status">Status</label>
-                                <select
-
-                                    className="form-select form-select-sm form-control"
-                                    aria-label=".form-select-sm example"
-                                    id="status"
-                                    name="status"
-                                    aria-describedby="status"
-                                >
-                                    <option defaultValue>{data.status}</option>
-                                    <option value="Approved">Approve</option>
-                                    <option value="Rejected">Reject</option>
-                                    <option value="Pending">Pending</option>
-                                </select>
-
 
                             </div>
                             <div class="modal-footer">

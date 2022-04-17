@@ -111,10 +111,10 @@ thead[data-test="table-foot"] {
   margin-top: 20px;
   margin-bottom: 10px;
 }
-.row div {
+/* .row div {
   margin-top: 15px;
 }
-
+ */
 .view-top {
   background-color: #ededed;
   border-radius: 5px;
