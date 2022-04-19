@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import useAuth from "../../../Hooks/useAuth";
 import Header from '../../../pages/Header';
 import Footer from "../../Footer/Footer";
 
@@ -10,7 +9,7 @@ const ViewMerchant = () => {
   const { id } = useParams()
   const [merchantData, setMerchantData] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/user/information/${id}`)
+    fetch(`https://backend.sbexpressbd.com/user/information/${id}`)
       .then(res => res.json())
       .then(data => setMerchantData(data))
   }, [id]);
@@ -31,7 +30,7 @@ const ViewMerchant = () => {
                   <div className="d-flex align-middle align-items-center justify-content-between">
                     <div className="me-3">
                       <img
-                        src={`http://localhost:5000/uploads/${merchantData.avatar}`}
+                        src={`https://backend.sbexpressbd.com/uploads/${merchantData.avatar}`}
                         alt=""
                         style={{ height: "100px", width: "100px" }}
                       />

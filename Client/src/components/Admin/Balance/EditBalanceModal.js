@@ -26,7 +26,7 @@ const EditBalanceModal = ({ data, call, setCall }) => {
       object[key] = value;
     });
 
-    axios.put(`http://localhost:5000/balance/update/${data._id}`, object)
+    axios.put(`https://backend.sbexpressbd.com/balance/update/${data._id}`, object)
 
       .then(function (response) {
         console.log(response);

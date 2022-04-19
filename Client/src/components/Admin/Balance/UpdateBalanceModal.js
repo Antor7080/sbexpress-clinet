@@ -26,7 +26,7 @@ const UpdateBalanceModal = ({ data, call, setCall }) => {
         });
 
         if (parseInt(object.invoice) === data.invoice) {
-            axios.put(`http://localhost:5000/balance/update/${data._id}`, object)
+            axios.put(`https://backend.sbexpressbd.com/balance/update/${data._id}`, object)
 
                 .then(function (response) {
                     if (response.status === 200) {
@@ -69,7 +69,7 @@ const UpdateBalanceModal = ({ data, call, setCall }) => {
         e.preventDefault();
 
 
-        axios.put(`http://localhost:5000/balance/update/${data._id}`, status)
+        axios.put(`https://backend.sbexpressbd.com/balance/update/${data._id}`, status)
 
             .then(function (response) {
                 console.log(response);

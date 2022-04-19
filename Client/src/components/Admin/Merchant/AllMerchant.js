@@ -24,7 +24,7 @@ const AllMerchant = () => {
   };
   useEffect(() => {
     setLoading(true)
-    fetch(`http://localhost:5000/user/all-information?status=Approved&page=${page}`, config)
+    fetch(`https://backend.sbexpressbd.com/user/all-information?status=Approved&page=${page}`, config)
       .then(res => res.json())
       .then(data => {
         setMerchantData(data.user);
@@ -54,7 +54,7 @@ const AllMerchant = () => {
 
   const modalData = (id) => {
 
-    fetch(`http://localhost:5000/user/information/${id}`, config)
+    fetch(`https://backend.sbexpressbd.com/user/information/${id}`, config)
       .then(res => res.json())
       .then(data => {
         setData(data);
@@ -93,11 +93,12 @@ const AllMerchant = () => {
                         <thead style={{ backgroundColor: "#ededed" }}>
                           <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">Name</th>
+                            <th scope="col">Marchants  Name</th>
                             <th scope="col">Shop Name</th>
-                            <th scope="col">Updated At</th>
-                            <th scope="col">Time</th>
+                            <th scope="col">Balance</th>
                             <th scope="col">Contact Number</th>
+                            <th scope="col">Updated At</th>
+
                             <th scope="col">Status</th>
                             <th scope="col">Action</th>
 
@@ -113,9 +114,11 @@ const AllMerchant = () => {
                               <td>{data?.name}</td>
 
                               <td>{data.shope_name}</td>
-                              <td>{new Date(data.updatedAt).toLocaleDateString("en-GB")}</td>
-                              <td>{new Date(data.updatedAt).toLocaleTimeString("en-GB")}</td>
+                              <td>{data.amount}</td>
                               <td>{data.number}</td>
+                              <td>{new Date(data.updatedAt).toLocaleDateString("en-GB")}</td>
+
+
                               <td>{data.status}</td>
                               <td>
                                 <div className="d-flex align-items-center text-center pending-button">

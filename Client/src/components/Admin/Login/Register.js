@@ -23,7 +23,7 @@ const Register = () => {
         e.preventDefault();
         setLoading(true);
         const formdata = new FormData(form.current);
-        axios.post('http://localhost:5000/user/register', formdata)
+        axios.post('https://backend.sbexpressbd.com/user/register', formdata)
             .then(function (response) {
                 if (response.status === 200) {
                     setError("")

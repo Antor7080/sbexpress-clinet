@@ -27,7 +27,7 @@ const EditRechargeModal = ({ data, call, setCall }) => {
             object[key] = value;
         });
 
-        axios.put(`http://localhost:5000/recharge/update/${data._id}`, object)
+        axios.put(`https://backend.sbexpressbd.com/recharge/update/${data._id}`, object)
 
             .then(function (response) {
                 console.log(response);
@@ -96,7 +96,7 @@ const EditRechargeModal = ({ data, call, setCall }) => {
                                     type="text"
                                     name=""
                                     id="name"
-                                    value={data?.user?.name}
+                                    value={data?.name}
                                     disabled />
 
                                 <label htmlFor="amount">Amount</label>
@@ -138,6 +138,7 @@ const EditRechargeModal = ({ data, call, setCall }) => {
                                     <option value="Banglalink">Banglalink</option>
                                     <option value="Grameenphone">Grameenphone</option>
                                     <option value="Teletalk">Teletalk</option>
+                                    <option value="Robi">Robi</option>
                                 </select>
                             </div>
                             <div class="modal-footer border-0">

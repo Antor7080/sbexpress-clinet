@@ -25,7 +25,7 @@ const EditRechargeModal = ({ data, call, setCall }) => {
             object[key] = value;
         });
 
-        axios.put(`http://localhost:5000/recharge/update/${data._id}`, object)
+        axios.put(`https://backend.sbexpressbd.com/recharge/update/${data._id}`, object)
 
             .then(function (response) {
                 if (response.status === 200) {
@@ -163,8 +163,8 @@ const EditRechargeModal = ({ data, call, setCall }) => {
 
                                 <label htmlFor="amount">Amount</label>
                                 <input className="form-control" type="text" name="amount" id="amount" defaultValue={data?.amount} />
-                                <label htmlFor="contact">Contact Number</label>
-                                <input className="form-control" type="number" name="" id="contact" value={data?.user?.number} disabled />
+                                <label htmlFor="contact"> Number</label>
+                                <input className="form-control" type="number" name="" id="contact" value={data?.number} disabled />
 
                                 <label htmlFor="">Note</label>
                                 <textarea

@@ -34,7 +34,7 @@ const UpdateRechargeModal = ({ data }) => {
                                     type="number"
                                     name=""
                                     id=""
-                                    value={data?.user?.number}
+                                    value={data?.number}
                                     disabled
                                 />
                                 <label htmlFor="">Amount</label>

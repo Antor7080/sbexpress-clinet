@@ -41,7 +41,7 @@ const AddMobileBanking = () => {
       object[key] = value;
     });
 
-    axios.post('http://localhost:5000/mobile-banking/', object)
+    axios.post('https://backend.sbexpressbd.com/mobile-banking/', object)
 
       .then(function (response) {
         setLoading(false)
@@ -79,7 +79,7 @@ const AddMobileBanking = () => {
   };
   useEffect(() => {
     setLoading(true)
-    fetch(`http://localhost:5000/mobile-banking/?page=${page}&email=${userData.email}`, config)
+    fetch(`https://backend.sbexpressbd.com/mobile-banking/?page=${page}&email=${userData.email}`, config)
       .then(res => res.json())
       .then(data => {
         setDisplayBalanceData(data.data);

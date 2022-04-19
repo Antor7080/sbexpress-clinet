@@ -24,7 +24,7 @@ const AddBalance = () => {
   };
   useEffect(() => {
     setLoading(true)
-    fetch(`http://localhost:5000/balance/all-balance-request?page=${page}&email=${userData.email}`, config)
+    fetch(`https://backend.sbexpressbd.com/balance/all-balance-request?page=${page}&email=${userData.email}`, config)
       .then(res => res.json())
       .then(data => {
         console.log(data);
@@ -67,7 +67,7 @@ const AddBalance = () => {
       object[key] = value;
     });
 
-    axios.post('http://localhost:5000/balance/add-balance', object)
+    axios.post('https://backend.sbexpressbd.com/balance/add-balance', object)
       .then(function (response) {
         setLoading(false)
         if (response.status === 200) {

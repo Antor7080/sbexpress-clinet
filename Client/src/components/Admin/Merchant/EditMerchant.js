@@ -26,7 +26,7 @@ const EditMerchant = () => {
 
   const [userInfo, setUserInfo] = useState([])
   useEffect(() => {
-    fetch(`http://localhost:5000/user/information/${id}`)
+    fetch(`https://backend.sbexpressbd.com/user/information/${id}`)
       .then(res => res.json())
       .then(data => setUserInfo(data))
   }, [id]);
@@ -41,7 +41,7 @@ const EditMerchant = () => {
     e.preventDefault();
     const formdata = new FormData(form.current);
 
-    axios.put(`http://localhost:5000/user/edit/${id}`, formdata)
+    axios.put(`https://backend.sbexpressbd.com/user/edit/${id}`, formdata)
       .then(function (response) {
         setLoading(false)
         if (response.status === 200) {

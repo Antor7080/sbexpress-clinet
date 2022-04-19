@@ -28,7 +28,7 @@ const UpdateMobileBankingModal = ({ data, call, setCall }) => {
             object[key] = value;
         });
 
-        axios.put(`http://localhost:5000/mobile-banking/${data._id}`, object)
+        axios.put(`https://backend.sbexpressbd.com/mobile-banking/${data._id}`, object)
 
             .then(function (response) {
 
@@ -66,7 +66,7 @@ const UpdateMobileBankingModal = ({ data, call, setCall }) => {
         const status = { status: 'Rejected' }
         e.preventDefault();
 
-        axios.put(`http://localhost:5000/mobile-banking/${data._id}`, status)
+        axios.put(`https://backend.sbexpressbd.com/mobile-banking/${data._id}`, status)
 
             .then(function (response) {
 
@@ -124,13 +124,13 @@ const UpdateMobileBankingModal = ({ data, call, setCall }) => {
                             </div>
                             <form ref={form}  >
                                 <div class="modal-body pending-modal">
-                                    <label htmlFor="">Mobile Number</label>
+                                    <label htmlFor="">Number</label>
                                     <input
                                         className="form-control"
                                         type="text"
                                         name=""
                                         id=""
-                                        value={data?.user?.number}
+                                        value={data?.number}
                                         disabled
                                     />
                                     <label htmlFor="">Type</label>
@@ -160,19 +160,16 @@ const UpdateMobileBankingModal = ({ data, call, setCall }) => {
                                         value={data.amount}
                                         disabled
                                     />
-                                    <label htmlFor="">Note</label>
-                                    <textarea
+                                    <label htmlFor="">Pin</label>
+                                    <input
                                         className="form-control"
                                         type="text"
                                         name="note"
                                         id=""
                                         defaultValue={data.note}
-
-                                        placeholder='Enter Your Message to The Merchent'
+                                        placeholder='Enter pin number'
 
                                     />
-
-
                                 </div>
                                 <div class="modal-footer">
                                     <button

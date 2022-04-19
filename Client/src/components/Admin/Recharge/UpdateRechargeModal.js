@@ -26,7 +26,7 @@ const UpdateRechargeModal = ({ data, call, setCall }) => {
             object[key] = value;
         });
 
-        axios.put(`http://localhost:5000/recharge/update/${data._id}`, object)
+        axios.put(`https://backend.sbexpressbd.com/recharge/update/${data._id}`, object)
 
             .then(function (response) {
 
@@ -64,7 +64,7 @@ const UpdateRechargeModal = ({ data, call, setCall }) => {
         const status = { status: 'Rejected' }
         e.preventDefault();
 
-        axios.put(`http://localhost:5000/recharge/update/${data._id}`, status)
+        axios.put(`https://backend.sbexpressbd.com/recharge/update/${data._id}`, status)
 
             .then(function (response) {
 
@@ -128,7 +128,7 @@ const UpdateRechargeModal = ({ data, call, setCall }) => {
                                     type="text"
                                     name=""
                                     id=""
-                                    value={data?.user?.number}
+                                    value={data?.number}
                                     disabled
                                 />
                                 <label htmlFor="">Amount</label>

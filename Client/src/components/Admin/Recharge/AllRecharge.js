@@ -9,7 +9,8 @@ const AllRecharge = () => {
   const [displayrechargeData, setDisplayRechargeData] = useState([]);
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
-  const [call, setCall] = useState(false);
+
+
   const Authorization = localStorage.getItem("token")
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const config = {
@@ -19,7 +20,7 @@ const AllRecharge = () => {
   };
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:5000/recharge/recharges?status=Approved&page=${page}`, config)
+    fetch(`https://backend.sbexpressbd.com/recharge/recharges?status=Approved&page=${page}`, config)
       .then(res => res.json())
       .then(data => {
         setRechargeData(data.data);
@@ -30,7 +31,7 @@ const AllRecharge = () => {
         setLoading(false)
       })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, call])
+  }, [page])
 
 
   const handleSearch = (e) => {
@@ -71,14 +72,11 @@ const AllRecharge = () => {
                       <th scope="col">Invoice</th>
                       <th scope="col">Name</th>
                       <th scope="col">Amount</th>
-                      <th scope="col">Shop Name</th>
+                      <th scope="col">Number</th>
                       <th scope="col">Operator</th>
-                      <th scope="col">Contact Number</th>
-
-                      <th scope="col">Status</th>
-
-                      <th scope="col">Updated</th>
+                      <th scope="col">Date</th>
                       <th scope="col">Time</th>
+                      <th scope="col">Status</th>
 
                     </tr>
                   </thead>
@@ -91,81 +89,11 @@ const AllRecharge = () => {
                         <td>{data.invoice}</td>
                         <td>{data.user.name}</td>
                         <td>{data.amount}</td>
-                        <td>{data.user.shope_name}</td>
+                        <td>{data.number}</td>
                         <td>{data.simOperator}</td>
-                        <td>{data.user.number}</td>
-                        <td>{data.status}</td>
-
-
                         <td>{new Date(data.updatedAt).toLocaleDateString("en-GB")}</td>
                         <td>{new Date(data.updatedAt).toLocaleTimeString("en-GB")}</td>
-
-                        {/*  <td>
-                            <div className="d-flex align-items-center pending-button">
-                              <button
-                                type="button"
-                                class="btn btn-success"
-                                data-toggle="modal"
-                                data-target="#exampleModal"
-                                onClick={() => { modalData(data._id) }}
-                              >
-                                Confirm
-                              </button>
-
-                              <UpdateBalanceModal data={data1} ></UpdateBalanceModal>
-
-                              <button
-                                type="button"
-                                class="btn btn-danger"
-                                data-toggle="modal"
-                                data-target="#exampleModal2"
-                              >
-                                Delete
-                              </button>
-
-                              <div
-                                class="modal fade"
-                                id="exampleModal2"
-                                tabindex="-1"
-                                aria-labelledby="exampleModalLabel"
-                                aria-hidden="true"
-                              >
-                                <div class="modal-dialog modal-dialog-centered">
-                                  <div class="modal-content ">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabel">
-                                        Are you want sure to delete?
-                                      </h5>
-                                      <button
-                                        type="button"
-                                        class="close"
-                                        data-dismiss="modal"
-                                        aria-label="Close"
-                                      >
-                                        <span aria-hidden="true">&times;</span>
-                                      </button>
-                                    </div>
-
-                                    <div class="modal-footer border-0">
-                                      <button
-                                        type="button"
-                                        className="btn btn-danger border border-danger"
-                                        data-dismiss="modal"
-                                      >
-                                        No
-                                      </button>
-                                      <button
-                                        type="button"
-                                        class="btn btn-primary button-common-color"
-                                      >
-                                        Yes
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            </td> */}
+                        <td>{data.status}</td>
                       </tr>
                     ))}
                   </tbody>

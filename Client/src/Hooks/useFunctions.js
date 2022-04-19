@@ -23,15 +23,15 @@ const useFunctions = () => {
     })
     const loginUser = (items) => {
         axios
-            .post("http://localhost:5000/user/login", items)
+            .post("https://backend.sbexpressbd.com/user/login", items)
             .then((response) => {
                 if (response.status === 200) {
                     Toast.fire({
                         icon: "success",
                         title: response.data.msg,
                     });
-                    Cookies.set("access", response.data.accesstoken )
-                    Cookies.set("refrash", response.data.refreshtoken )
+                    Cookies.set("access", response.data.accesstoken)
+                    Cookies.set("refrash", response.data.refreshtoken)
                     localStorage.setItem("user", JSON.stringify(response.data.userData))
                     localStorage.setItem("token", response.data.accesstoken);
 
@@ -50,7 +50,7 @@ const useFunctions = () => {
                             title: "You have no permission to login",
                         });
                     }
-                    // window.location.reload();
+                    window.location.reload();
                 }
             })
             .catch((error) => {
@@ -71,13 +71,13 @@ const useFunctions = () => {
 
 
     }
-    axios.get("http://localhost:5000/user/refresh_token", { withCredentials: true })
-        .then(res => console.log(res))
-
-        
+    /*     axios.get("https://backend.sbexpressbd.com/user/refresh_token", { withCredentials: true })
+            .then(res => console.log(res))
+    
+             */
 
     const logout = (history) => {
-        axios.get("http://localhost:5000/user/logout")
+        axios.get("https://backend.sbexpressbd.com/user/logout")
             .then((res) => {
                 if (res.status === 200) {
 
@@ -97,7 +97,7 @@ const useFunctions = () => {
     const userData = (JSON.parse(userInfo));
     const token1 = localStorage.getItem('token')
     useEffect(() => {
-        axios.get(`http://localhost:5000/user/information/${userData?._id}`, {
+        axios.get(`https://backend.sbexpressbd.com/user/information/${userData?._id}`, {
             headers: {
                 'Authorization': token1,
 

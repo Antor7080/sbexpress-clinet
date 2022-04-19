@@ -22,7 +22,7 @@ const Menu = () => {
           <div className="sidebar">
             <div className="user-panel  d-flex">
               <div className="image">
-                <img src={`http://localhost:5000/uploads/${user?.avatar}`} className="img-circle elevation-2" alt="User " />
+                <img src={`https://backend.sbexpressbd.com/uploads/${user?.avatar}`} className="img-circle elevation-2" alt="User " />
               </div>
               <div className="info">
                 <Link to="#" className="d-block">
@@ -273,6 +273,31 @@ const Menu = () => {
                     <p>Accounts</p>
                   </Link>
                 </li>
+                {/* ======notice======= */}
+                <li className="nav-item has-treeview">
+                  <Link to="#" className="nav-link">
+                    <i className="nav-icon far fa-plus-square" />
+                    <p>
+                      Notice
+                      <i className="fas fa-angle-left right" />
+                    </p>
+                  </Link>
+                  <ul className="nav nav-treeview">
+                    <li className="nav-item">
+                      <Link to="/admin/add-notice" className="nav-link">
+                        <i className="far fa-circle nav-icon" />
+                        <p>Add New Notice</p>
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to="/admin/all-notice" className="nav-link">
+                        <i className="far fa-circle nav-icon" />
+                        <p>All Notice</p>
+                      </Link>
+                    </li>
+
+                  </ul>
+                </li>
                 <li className="nav-item has-treeview mb-5">
                   <Link to="#" className="nav-link">
                     <i className="nav-icon far fa-plus-square" />
@@ -318,7 +343,7 @@ const Menu = () => {
         <div className="sidebar">
           <div className="user-panel  d-flex">
             <div className="image">
-              <img src={`http://localhost:5000/uploads/${user?.avatar}`} className="img-circle elevation-2" alt="User " />
+              <img src={`https://backend.sbexpressbd.com/uploads/${user?.avatar}`} className="img-circle elevation-2" alt="User " />
             </div>
             <div className="info">
               <Link to="#" className="d-block">
@@ -560,6 +585,8 @@ const Menu = () => {
                   <p>Accounts</p>
                 </Link>
               </li>
+
+
               <li className="nav-item has-treeview mb-5">
                 <Link to="#" className="nav-link">
                   <i className="nav-icon far fa-plus-square" />

@@ -23,7 +23,7 @@ const RejectedBalance = () => {
   const userData = (JSON.parse(userInfo))
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:5000/balance/all-balance-request?status=Rejected&page=${page}&email=${userData.email}`, config)
+    fetch(`https://backend.sbexpressbd.com/balance/all-balance-request?status=Rejected&page=${page}&email=${userData.email}`, config)
       .then(res => res.json())
       .then(data => {
         setBalanceData(data.data);
@@ -48,7 +48,7 @@ const RejectedBalance = () => {
   const [data1, setData] = useState({});
   const modalData = (id) => {
 
-    fetch(`http://localhost:5000/balance/all-balance-request/${id}`, config)
+    fetch(`https://backend.sbexpressbd.com/balance/all-balance-request/${id}`, config)
       .then(res => res.json())
       .then(data => {
         setData(data);
@@ -87,10 +87,9 @@ const RejectedBalance = () => {
                             <th scope="col">Invoice</th>
                             <th scope="col">Name</th>
                             <th scope="col">Amount</th>
-                            <th scope="col">Shop Name</th>
-                            <th scope="col">Payment_Method</th>
                             <th scope="col">Number</th>
-                            <th scope="col">Created At</th>
+                            <th scope="col">Payment_Method</th>
+                            <th scope="col">Date</th>
                             <th scope="col">Time</th>
                             <th scope="col">Status</th>
                             <th scope="col">Action</th>
@@ -106,9 +105,8 @@ const RejectedBalance = () => {
                               <td>{data.invoice}</td>
                               <td>{data.user.name}</td>
                               <td>{data.amount}</td>
-                              <td>{data.user.shope_name}</td>
-                              <td>{data.payment_method}</td>
                               <td>{data.user.number}</td>
+                              <td>{data.payment_method}</td>
                               <td>{new Date(data.updatedAt).toLocaleDateString("en-GB")}
                               </td>
                               <td>

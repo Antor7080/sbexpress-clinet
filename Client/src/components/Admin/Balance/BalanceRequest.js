@@ -21,7 +21,7 @@ const BalanceRequest = () => {
   };
   useEffect(() => {
     setLoading(true)
-    fetch(`http://localhost:5000/balance/all-balance-request?status=Pending&page=${page}`, config)
+    fetch(`https://backend.sbexpressbd.com/balance/all-balance-request?status=Pending&page=${page}`, config)
       .then(res => res.json())
       .then(data => {
         setBalanceData(data.data);
@@ -46,7 +46,7 @@ const BalanceRequest = () => {
   const [data1, setData] = useState({});
   const modalData = (id) => {
 
-    fetch(`http://localhost:5000/balance/all-balance-request/${id}`, config)
+    fetch(`https://backend.sbexpressbd.com/balance/all-balance-request/${id}`, config)
       .then(res => res.json())
       .then(data => {
         setData(data);
@@ -85,7 +85,7 @@ const BalanceRequest = () => {
                             <th scope="col">Invoice</th>
                             <th scope="col">Name</th>
                             <th scope="col">Amount</th>
-                            <th scope="col">Shop Name</th>
+
                             <th scope="col">Payment_Method</th>
                             <th scope="col"> Number</th>
                             <th scope="col">Date</th>
@@ -103,7 +103,7 @@ const BalanceRequest = () => {
                               <td>{data.invoice}</td>
                               <td>{data.user.name}</td>
                               <td>{data.amount}</td>
-                              <td>{data.user.shope_name}</td>
+
                               <td>{data.payment_method}</td>
                               <td>{data.user.number}</td>
                               <td>{new Date(data.createdAt).toLocaleDateString("en-GB")}

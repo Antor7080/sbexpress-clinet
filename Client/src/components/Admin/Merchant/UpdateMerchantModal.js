@@ -27,7 +27,7 @@ const UpdateMerchantModal = ({ data, call, setCall }) => {
             object[key] = value;
         });
 
-        axios.put(`http://localhost:5000/user/update/${data._id}`, object)
+        axios.put(`https://backend.sbexpressbd.com/user/update/${data._id}`, object)
 
             .then(function (response) {
 
@@ -61,7 +61,7 @@ const UpdateMerchantModal = ({ data, call, setCall }) => {
     const handleDelete = (e) => {
         const status = { status: 'Rejected' }
         e.preventDefault();
-        axios.put(`http://localhost:5000/user/update/${data._id}`, status)
+        axios.put(`https://backend.sbexpressbd.com/user/update/${data._id}`, status)
 
             .then(function (response) {
                 console.log(response);

@@ -20,7 +20,7 @@ const AllMobileBanking = () => {
   };
   useEffect(() => {
     setLoading(true)
-    fetch(`http://localhost:5000/mobile-banking?status=Approved&page=${page}&email=${userData.email}`, config)
+    fetch(`https://backend.sbexpressbd.com/mobile-banking?status=Approved&page=${page}&email=${userData.email}`, config)
       .then(res => res.json())
       .then(data => {
         setBalanceData(data.data);
@@ -72,13 +72,14 @@ const AllMobileBanking = () => {
                       <thead style={{ backgroundColor: "#ededed" }}>
                         <tr>
                           <th scope="col">Invoice</th>
-                          <th scope="col">Type</th>
-                          <th scope="col">Amount</th>
                           <th scope="col">Name</th>
-                          <th scope="col">Operator</th>
+                          <th scope="col">Amount</th>
                           <th scope="col">Number</th>
-                          <th scope="col">Updated</th>
+                          <th scope="col">Operator</th>
+                          <th scope="col">Type</th>
+                          <th scope="col">Pin</th>
                           <th scope="col">Time</th>
+                          <th scope="col">Date</th>
                           <th scope="col">Status</th>
 
                         </tr>
@@ -90,11 +91,12 @@ const AllMobileBanking = () => {
                         {displayBalanceData && displayBalanceData.map((data) => (
                           <tr key={data.invoice}>
                             <td>{data.invoice}</td>
-                            <td>{data.type}</td>
-                            <td>{data.amount}</td>
                             <td>{data.user.name}</td>
+                            <td>{data.amount}</td>
+                            <td>{data.number}</td>
                             <td>{data.Mobile_Banking_Operator}</td>
-                            <td>{data.user.number}</td>
+                            <td>{data.type}</td>
+                            <td>{data.note}</td>
                             <td>{new Date(data.updatedAt).toLocaleDateString("en-GB")}</td>
                             <td>{new Date(data.updatedAt).toLocaleTimeString("en-GB")}</td>
                             <td>{data.status}</td>

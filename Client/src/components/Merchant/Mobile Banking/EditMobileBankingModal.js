@@ -24,8 +24,7 @@ const EditMobileBankingModal = ({ data, call, setCall }) => {
         formdata.forEach(function (value, key) {
             object[key] = value;
         });
-
-        axios.put(`http://localhost:5000/mobile-banking/${data._id}`, object)
+        axios.put(`https://backend.sbexpressbd.com/mobile-banking/${data._id}`, object)
 
             .then(function (response) {
                 if (response.status === 200) {

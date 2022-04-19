@@ -19,7 +19,7 @@ const AllBalance = () => {
   };
   useEffect(() => {
     setLoading(true)
-    fetch(`http://localhost:5000/balance/all-balance-request?status=Approved&page=${page}&email=${userData.email}`, config)
+    fetch(`https://backend.sbexpressbd.com/balance/all-balance-request?status=Approved&page=${page}&email=${userData.email}`, config)
       .then(res => res.json())
       .then(data => {
         setBalanceData(data.data);
@@ -73,9 +73,9 @@ const AllBalance = () => {
                             <th scope="col">Invoice</th>
                             <th scope="col">Name</th>
                             <th scope="col">Amount</th>
-                            <th scope="col">Shop Name</th>
-                            <th scope="col">Payment_Method</th>
+
                             <th scope="col">Number</th>
+                            <th scope="col">Payment_Method</th>
                             <th scope="col">Status</th>
                             <th scope="col">Date</th>
                             <th scope="col">time</th>
@@ -91,9 +91,8 @@ const AllBalance = () => {
                               <td>{data.invoice}</td>
                               <td>{data.user.name}</td>
                               <td>{data.amount}</td>
-                              <td>{data.user.shope_name}</td>
-                              <td>{data.payment_method}</td>
                               <td>{data.user.number}</td>
+                              <td>{data.payment_method}</td>
                               <td>{data.status}</td>
                               <td>{new Date(data.updatedAt).toLocaleDateString("en-GB")}</td>
                               <td>{new Date(data.updatedAt).toLocaleTimeString("en-GB")}</td>

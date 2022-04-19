@@ -16,7 +16,7 @@ const RejectedMerchant = () => {
   };
   useEffect(() => {
     setLoading(true)
-    fetch(`http://localhost:5000/user/all-information?status=Rejected&page=${page}`, config)
+    fetch(`https://backend.sbexpressbd.com/user/all-information?status=Rejected&page=${page}`, config)
       .then(res => res.json())
       .then(data => {
         setMerchantData(data.user);
@@ -75,9 +75,9 @@ const RejectedMerchant = () => {
                             <th scope="col">Name</th>
 
                             <th scope="col">Shop Name</th>
+                            <th scope="col">Number</th>
                             <th scope="col">Updated At</th>
                             <th scope="col">Time</th>
-                            <th scope="col">Number</th>
                             <th scope="col">Status</th>
                             <th scope="col">Action</th>
 
@@ -93,13 +93,14 @@ const RejectedMerchant = () => {
                               <td>{data?.name}</td>
 
                               <td>{data.shope_name}</td>
+                              <td>{data.number}</td>
                               <td>{new Date(data.updatedAt).toLocaleDateString("en-GB")}
                               </td>
                               <td>
                                 {
                                   new Date(data.updatedAt).toLocaleTimeString("en-GB")
                                 }</td>
-                              <td>{data.number}</td>
+
                               <td>{data.status}</td>
                               <td>
                                 <div className="d-flex align-items-center pending-button">

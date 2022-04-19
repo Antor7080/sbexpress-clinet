@@ -41,7 +41,7 @@ const AddRecharge = () => {
       object[key] = value;
     });
 
-    axios.post('http://localhost:5000/recharge/add-reacharge', object)
+    axios.post('https://backend.sbexpressbd.com/recharge/add-reacharge', object)
 
       .then(function (response) {
         setLoading(false)
@@ -79,7 +79,7 @@ const AddRecharge = () => {
   };
   useEffect(() => {
     setLoading(true)
-    fetch(`http://localhost:5000/recharge/recharges?page=${page}&email=${userData.email}`, config)
+    fetch(`https://backend.sbexpressbd.com/recharge/recharges?page=${page}&email=${userData.email}`, config)
       .then(res => res.json())
       .then(data => {
         setDisplayBalanceData(data.data);
@@ -172,6 +172,7 @@ const AddRecharge = () => {
                       <option value="Banglalink">Banglalink</option>
                       <option value="Grameenphone">Grameenphone</option>
                       <option value="Teletalk">Teletalk</option>
+                      <option value="Robi">Robi</option>
                     </select>
                     {error?.simOperator && <small className="text-danger m-0 p-0">{error?.simOperator.msg}</small>}
                     <div id="sim" className="form-text">
@@ -196,7 +197,7 @@ const AddRecharge = () => {
                                 <th scope="col">Number</th>
                                 <th scope="col">Operator</th>
 
-                                <th scope="col">Created At</th>
+                                <th scope="col">Date</th>
                                 <th scope="col">Time</th>
                                 <th scope="col">Status</th>
 

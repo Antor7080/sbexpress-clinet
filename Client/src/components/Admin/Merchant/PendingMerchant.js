@@ -23,7 +23,7 @@ const PendingMerchant = () => {
   };
   useEffect(() => {
     setLoading(true)
-    fetch(`http://localhost:5000/user/all-information?status=Pending&page=${page}`, config)
+    fetch(`https://backend.sbexpressbd.com/user/all-information?status=Pending&page=${page}`, config)
       .then(res => res.json())
       .then(data => {
         setMerchantData(data.user);
@@ -51,7 +51,7 @@ const PendingMerchant = () => {
   const [data1, setData] = useState({});
 
   const modalData = (id) => {
-    fetch(`http://localhost:5000/user/information/${id}`, config)
+    fetch(`https://backend.sbexpressbd.com/user/information/${id}`, config)
       .then(res => res.json())
       .then(data => {
         setData(data);
@@ -90,10 +90,9 @@ const PendingMerchant = () => {
                           <th scope="col">ID</th>
                           <th scope="col">Name</th>
 
-                          <th scope="col">Shop Name</th>
+                          <th scope="col">Contact Number</th>
                           <th scope="col">Created At</th>
                           <th scope="col">Time</th>
-                          <th scope="col">Contact Number</th>
                           <th scope="col">Status</th>
                           <th scope="col">Action</th>
 
@@ -107,10 +106,10 @@ const PendingMerchant = () => {
                           <tr key={data?.id}>
                             <td>{data.id}</td>
                             <td>{data?.name}</td>
-                            <td>{data.shope_name}</td>
+                            <td>{data.number}</td>
                             <td>{new Date(data.createdAt).toLocaleDateString("en-GB")}</td>
                             <td>{new Date(data.createdAt).toLocaleTimeString("en-GB")}</td>
-                            <td>{data.number}</td>
+
                             <td>{data.status}</td>
                             <td>
                               <div className="d-flex align-items-center pending-button">

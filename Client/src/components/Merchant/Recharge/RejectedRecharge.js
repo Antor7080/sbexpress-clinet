@@ -21,7 +21,7 @@ const RejectedRecharge = () => {
   };
   useEffect(() => {
     setLoading(true)
-    fetch(`http://localhost:5000/recharge/recharges?status=Rejected&page=${page}&email=${userData.email}`, config)
+    fetch(`https://backend.sbexpressbd.com/recharge/recharges?status=Rejected&page=${page}&email=${userData.email}`, config)
       .then(res => res.json())
       .then(data => {
         setRechargeData(data.data);
@@ -43,7 +43,7 @@ const RejectedRecharge = () => {
   const [data1, setData] = useState({});
   const modalData = (id) => {
 
-    fetch(`http://localhost:5000/recharge/recharges/${id}`, config)
+    fetch(`https://backend.sbexpressbd.com/recharge/recharges/${id}`, config)
       .then(res => res.json())
       .then(data => {
         setData(data);
@@ -81,10 +81,10 @@ const RejectedRecharge = () => {
                           <th scope="col">Invoice</th>
                           <th scope="col">Name</th>
                           <th scope="col">Amount</th>
-                          <th scope="col">Shop Name</th>
-                          <th scope="col">Operator</th>
+
                           <th scope="col">Number</th>
-                          <th scope="col">Created At</th>
+                          <th scope="col">Operator</th>
+                          <th scope="col">Date</th>
                           <th scope="col">Time</th>
                           <th scope="col">Status</th>
                           <th scope="col">Action</th>
@@ -99,9 +99,9 @@ const RejectedRecharge = () => {
                             <td>{data.invoice}</td>
                             <td>{data.user.name}</td>
                             <td>{data.amount}</td>
-                            <td>{data.user.shope_name}</td>
+
+                            <td>{data.number}</td>
                             <td>{data.simOperator}</td>
-                            <td>{data.user.number}</td>
                             <td>{new Date(data.updatedAt).toLocaleDateString("en-GB")}
                             </td>
                             <td>
